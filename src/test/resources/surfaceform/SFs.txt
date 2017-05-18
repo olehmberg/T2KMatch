@@ -1,0 +1,2 @@
+gestern	yesterday	yst
+morgen	tomorrow	tmr
