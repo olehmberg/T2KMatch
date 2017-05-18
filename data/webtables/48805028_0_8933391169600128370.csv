@@ -1,0 +1,223 @@
+"species","code","1999","2000","2001"
+"horned grebe","hogr","x","x",""
+"pied-billed               grebe *","pbgr","x","x","x"
+"common loon","colo","x","x","x"
+"herring gull               *","herg","x","x","x"
+"ring-billed               gull *","rbgu","x","x","x"
+"franklin's               gull","frgu","","",""
+"greater               black-backed gull","gbbg","&nbsp;","&nbsp;","x"
+"bonaparte's               gull","bogu","x","x","x"
+"caspian tern               *","cate","x","x","x"
+"forster's               tern *","fote","x","x","x"
+"common tern               *","cote","x","x",""
+"black tern               *","blte","x","x",""
+"double-crested               cormorant *","dcco","x","x","x"
+"american               white pelican *","awpe","x","x","x"
+"common merganser               *","come","x","x","x"
+"red-breasted               merganser","rbme","x","x","x"
+"hooded merganser               *","home","x","x","x"
+"mallard *","mall","x","x","x"
+"american               black duck *","abdu","x","x","x"
+"gadwall *","gadw","x","x","x"
+"american               wigeon *","amwi","x","x","x"
+"eurasion               wigeon","euwi","&nbsp;","x",""
+"green-winged               teal *","agwt","x","x","x"
+"blue-winged               teal *","bwte","x","x","x"
+"northern               shoveler *","nsho","x","x","x"
+"northern               pintail *","nopi","x","x","x"
+"wood duck               *","wodu","x","x","x"
+"redhead *","redh","x","x","x"
+"canvasback               *","canv","x","x","x"
+"greater scaup","grsc","x","x","x"
+"lesser scaup               *","lesc","x","x","x"
+"ring-necked               duck","rndu","x","x","x"
+"common goldeneye","cogo","x","x","x"
+"bufflehead","buff","x","x","x"
+"oldsquaw","olds","x","",""
+"harlequin               duck","hard","&nbsp;","x",""
+"black scoter","blsc","x","x",""
+"white-winged               scoter","wwsc","x","",""
+"ruddy duck               *","rudu","x","x","x"
+"snow goose               (lesser white phase","lsgo","x","",""
+"snow goose               (lesser blue phase","blgo","x","",""
+"canada goose               *","cago","x","x","x"
+"tundra swan","whsw","x","x","x"
+"american               bittern *","ambi","x","x",""
+"least bittern               *","lebi","&nbsp;","x",""
+"great blue               heron *","gbhe","x","x","x"
+"great egret               *","greg","x","x","x"
+"snowy egret               *","sneg","&nbsp;","x",""
+"green heron               *","grhe","x","x","x"
+"black-crowned               night-heron *","bcnh","x","x",""
+"sandhill               crane *","sacr","x","x","x"
+"virginia               rail *","vira","x","",""
+"sora *","sora","x","x","x"
+"common moorhen               *","como","x","",""
+"american               coot *","amco","x","x","x"
+"wilson's               phalarope","wiph","NULL","x",""
+"red-necked               phalarope","rnph","","",""
+"american               woodcock *","amwo","x","x","x"
+"common snipe               *","cosn","x","x","x"
+"short-billed               dowitcher","sbdo","","","x"
+"long-billed               dowitcher","lbdo","","",""
+"red knot","rekn","x","",""
+"pectoral               sandpiper","pesa","x","x","x"
+"white-rumped               sandpiper","wrsa","","",""
+"baird's sandpiper","basa","x","x","x"
+"least sandpiper","lesa","x","x","x"
+"dunlin","dunl","x","x","x"
+"semipalmated               sandpiper","sesa","x","x","x"
+"sanderling","sand","x","x",""
+"marbled godwit","mago","x","",""
+"hudsonian               godwit","hugo","","",""
+"greater yellowlegs","grye","x","x","x"
+"lesser yellowlegs","leye","x","x","x"
+"solitary               sandpiper","sosa","x","x","x"
+"willet","will","x","",""
+"spotted sandpiper               *","spsa","x","x","x"
+"black-bellied               plover","bbpl","x","x","x"
+"american               golden plover","amgp","x","",""
+"killdeer               *","kill","x","x","x"
+"semipalmated               plover","sepl","x","x","x"
+"ruddy turnstone","rutu","x","x","x"
+"ruffed grouse               *","rugr","","x",""
+"ring-necked               pheasant *","rphe","x","",""
+"wild turkey               *","witu","&nbsp;","x","x"
+"rock dove               *","rodo","x","x",""
+"mourning               dove *","modo","x","x","x"
+"turkey vulture","tuvu","x","x","x"
+"northern               harrier *","noha","","x","x"
+"sharp-shinned               hawk","ssha","x","x","x"
+"cooper's               hawk *","coha","x","x","x"
+"northern               goshawk","nogo","","","x"
+"red-tailed               hawk *","rtha","x","x","x"
+"broad-winged               hawk","bwha","x","",""
+"rough-legged               hawk","rlha","x","x",""
+"bald eagle               *","baea","x","x","x"
+"peregrine               falcon *","pefa","x","","x"
+"merlin","merl","x","x","x"
+"american               kestrel *","amke","","",""
+"osprey","ospr","x","","x"
+"eastern screech               owl *","easo","","",""
+"great horned               owl *","ghow","x","x","x"
+"yellow-billed               cuckoo *","ybcu","","",""
+"black-billed               cuckoo *","bbcu","x","","x"
+"belted kingfisher               *","beki","x","x","x"
+"hairy woodpecker               *","hawo","x","x","x"
+"downy woodpecker               *","dowo","x","x","x"
+"yellow-bellied               sapsucker *","ybsa","x","x","x"
+"red-headed               woodpecker *","rhwo","x","x","x"
+"red-bellied               woodpecker *","rbwo","x","x","x"
+"northern               flicker (yellow-shafted) *","ysfl","x","x","x"
+"whip-poor-will               *","wpwi","x","",""
+"common nighthawk               *","coni","x","x",""
+"chimney swift               *","chsw","x","x","x"
+"ruby-throated               hummingbird *","rthu","x","x",""
+"eastern kingbird               *","eaki","x","x","x"
+"great crested               flycatcher *","gcfl","x","x","x"
+"eastern phoebe               *","eaph","x","x","x"
+"olive-sided               flycatcher","osfl","x","",""
+"eastern wood-pewee               *","eawp","x","x","x"
+"yellow-bellied               flycatcher","ybfl","x","x",""
+"willow flycatcher               *","wifl","x","x",""
+"alder flycatcher               *","alfl","x","x",""
+"least flycatcher               *","lefl","x","x","x"
+"blue               jay *","blja","x","x","x"
+"black-billed               magpie","bbma","&nbsp;","&nbsp;",""
+"american               crow *","amcr","x","x","x"
+"european               starling *","eust","x","x","x"
+"bobolink               *","bobo","","x",""
+"brown-headed               cowbird *","bhco","x","x","x"
+"yellow-headed               blackbird *","yhbl","x","",""
+"red-winged               blackbird *","rwbl","x","x","x"
+"eastern meadowlark               *","eame","x","",""
+"orchard oriole               *","oror","x","","x"
+"baltimore               oriole *","baor","x","x","x"
+"rusty blackbird","rubl","x","x","x"
+"brewer's               blackbird*","brbl","&nbsp;","&nbsp;","x"
+"common grackle               *","cogr","x","x","x"
+"evening grosbeak","evgr","","x",""
+"purple finch","pufi","","x","x"
+"common redpoll","core","x","",""
+"american               goldfinch *","amgo","x","x","x"
+"pine siskin","pisi","","x",""
+"snow bunting","snbu","x","x",""
+"lapland longspur","lalo","","",""
+"white-crowned               sparrow","wcsp","","x",""
+"white-throated               sparrow","wtsp","x","x","x"
+"american               tree sparrow","atsp","x","x","x"
+"chipping               sparrow *","chsp","x","","x"
+"dark-eyed               junco (slate-colored)","scju","x","x","x"
+"song sparrow               *","sosp","x","x","x"
+"lincoln's               sparrow","lisp","x","x","x"
+"swamp sparrow               *","swsp","x","x","x"
+"fox sparrow","fosp","x","x","x"
+"eastern towhee               *","eato","x","x","x"
+"northern               cardinal *","noca","x","x","x"
+"rose-breasted               grosbeak *","rbgr","x","x","x"
+"indigo bunting               *","inbu","x","x",""
+"scarlet tanager               *","scta","x","x","x"
+"purple martin               *","puma","x","x","x"
+"cliff swallow               *","clsw","x","x","x"
+"barn swallow               *","bars","x","x","x"
+"tree swallow               *","tres","x","x","x"
+"bank swallow               *","basw","","","x"
+"northern               rough-winged swallow *","nrws","x","x","x"
+"cedar waxwing               *","cedw","x","x","x"
+"northern               shrike","nshr","","",""
+"red-eyed               vireo *","revi","x","x","x"
+"philadelphia               vireo","phvi","x","x","x"
+"warbling               vireo *","wavi","x","x","x"
+"yellow-throated               vireo *","ytvi","","x","x"
+"blue-headed               vireo","bhvi","x","x",""
+"black-and-white               warbler *","baww","x","x","x"
+"prothonotary               warbler","prow","x","",""
+"blue-winged               warbler","bwwa","x","x","x"
+"golden-winged               warbler","gwwa","x","x","x"
+"nashville               warbler","nawa","x","x","x"
+"orange-crowned               warbler","ocwa","x","x","x"
+"tennessee               warbler","tewa","x","x","x"
+"northern               parula","nopa","x","x","x"
+"cape may               warbler","cmwa","x","x","x"
+"yellow warbler               *","ywar","x","x","x"
+"black-throated               blue warbler","btbw","x","","x"
+"yellow-rumped               warbler (myrtle)","mywa","x","x","x"
+"magnolia               warbler","mawa","x","x","x"
+"chestnut-sided               warbler","cswa","x","x","x"
+"bay-breasted               warbler","bbwa","x","x","x"
+"blackpoll               warbler","blpw","x","x","x"
+"blackburnian               warbler","blbw","x","x","x"
+"black-throated               green warbler","btnw","x","x","x"
+"palm warbler               (western)","wpwa","x","x","x"
+"palm warbler               (yellow)","ypwa","&nbsp;","x",""
+"ovenbird               *","oven","x","x","x"
+"northern               waterthrush","nowa","x","x","x"
+"louisiana               waterthrush","lowa","","",""
+"mourning               warbler *","mowa","x","x","x"
+"common yellowthroat               *","coye","x","x","x"
+"yellow-breasted               chat","ybch","","",""
+"wilson's               warbler","wiwa","x","x","x"
+"canada warbler","cawa","x","x",""
+"american               redstart *","amre","x","x","x"
+"house sparrow               *","hosp","","x","x"
+"american               pipit","ampi","x","x",""
+"gray catbird               *","grca","x","x","x"
+"brown thrasher               *","brth","x","x","x"
+"house wren               *","howr","x","x","x"
+"winter wren","wiwr","x","x","x"
+"sedge wren               *","sewr","x","",""
+"marsh wren               *","mawr","x","x",""
+"brown creeper","brcr","x","x","x"
+"white-breasted               nuthatch *","wbnu","x","x","x"
+"red-breasted               nuthatch *","rbnu","x","x",""
+"black-capped               chickadee *","bcch","x","x","x"
+"golden-crowned               kinglet","gcki","x","x","x"
+"ruby-crowned               kinglet","rcki","x","x","x"
+"blue-gray               gnatcatcher *","bggn","x","x","x"
+"eastern bluebird               *","eabl","&nbsp;","x","x"
+"wood thrush               *","woth","x","x","x"
+"veery *","veer","x","x","x"
+"gray-cheeked               thrush","gcth","x","x",""
+"swainson's               thrush","swth","x","x",""
+"hermit thrush","heth","x","x","x"
+"american               robin *","amro","x","x","x"
