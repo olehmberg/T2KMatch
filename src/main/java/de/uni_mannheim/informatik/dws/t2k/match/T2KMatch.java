@@ -443,7 +443,7 @@ public class T2KMatch extends Executable implements Serializable {
     protected void evaluateInstanceCorrespondences(Processable<Correspondence<MatchableTableRow, MatchableTableColumn>> instanceCorrespondences, String name) {
     	Performance instancePerf = null;
     	if(instanceGs!=null) {
-    		instanceCorrespondences.deduplicate();
+    		instanceCorrespondences.distinct();
 	    	MatchingEvaluator<MatchableTableRow, MatchableTableColumn> instanceEvaluator = new MatchingEvaluator<>(false);
 	    	Collection<Correspondence<MatchableTableRow, MatchableTableColumn>> instanceCorrespondencesCollection = instanceCorrespondences.get();
 	    	System.out.println(String.format("%d %s instance correspondences", instanceCorrespondencesCollection.size(), name));
@@ -462,7 +462,7 @@ public class T2KMatch extends Executable implements Serializable {
     protected void evaluateSchemaCorrespondences(Processable<Correspondence<MatchableTableColumn, MatchableTableRow>> schemaCorrespondences, String name) {
     	Performance schemaPerf = null;
 		if(schemaGs!=null) {
-			schemaCorrespondences.deduplicate();
+			schemaCorrespondences.distinct();
 			MatchingEvaluator<MatchableTableColumn, MatchableTableRow> schemaEvaluator = new MatchingEvaluator<>(false);
 			Collection<Correspondence<MatchableTableColumn, MatchableTableRow>> schemaCorrespondencesCollection = schemaCorrespondences.get();
 			System.out.println(String.format("%d %s schema correspondences", schemaCorrespondencesCollection.size(), name));
@@ -481,7 +481,7 @@ public class T2KMatch extends Executable implements Serializable {
     protected void evaluateClassCorrespondences(Processable<Correspondence<MatchableTable, MatchableTableColumn>> classCorrespondences, String name) {
     	Performance classPerf = null;
 		if(classGs!=null) {
-			classCorrespondences.deduplicate();
+			classCorrespondences.distinct();
 			MatchingEvaluator<MatchableTable, MatchableTableColumn> classEvaluator = new MatchingEvaluator<>(false);
 			Collection<Correspondence<MatchableTable, MatchableTableColumn>> classCorrespondencesCollection = classCorrespondences.get();
 			System.out.println(String.format("%d %s class correspondences", classCorrespondencesCollection.size(), name));
