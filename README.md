@@ -2,11 +2,28 @@
 
 T2K Match [1] is matching algorithm optimised to match millions of web tables against a central knowledge base.
 
-Many web sites provide data in the form of HTML tables. Millions of such data tables have been extracted from the [CommonCrawl](http://commoncrawl.org/) web corpus by the [Web Data Commons](http://webdatacommons.org/webtables/) project [3]. Data from these tables can be used to fill missing values in large cross-domain knowledge bases such as DBpedia [2]. This project is an example of how pre-defined building blocks from the [WInte.r framework](https://github.com/olehmberg/winter) are combined into an advanced, use-case specific integration method. The algorithm is optimized to match millions of Web tables against a central knowledge base describing millions of instances belonging to hundreds of different classes  (such a people or locations) [2]. 
+Many web sites provide data in the form of HTML tables. Millions of such data tables have been extracted from the [CommonCrawl](http://commoncrawl.org/) web corpus by the [Web Data Commons](http://webdatacommons.org/webtables/) project [3]. Data from these tables can be used to fill missing values in large cross-domain knowledge bases such as DBpedia [2]. This project is an example of how pre-defined building blocks from the [WInte.r framework](https://github.com/olehmberg/winter) are combined into an advanced, use-case specific integration method. The algorithm is optimized to match millions of Web tables against a central knowledge base describing millions of instances belonging to hundreds of different classes  (such a people or locations) [2].
 
-## Acknowledgments
+## How to run
 
-This project is a re-implementation of the [original T2K Match algorithm](http://dws.informatik.uni-mannheim.de/en/research/T2K) developed at the [Data and Web Science Group](http://dws.informatik.uni-mannheim.de/) at the [University of Mannheim](http://www.uni-mannheim.de/) using the [WInte.r framework](https://github.com/olehmberg/winter). 
+To run T2K Match, use the `run_t2k_match` script in the scripts directory.
+1. Copy the compiled T2K Match jar file to the /lib/ directory in your home or change the path in the script file
+```bash
+JAR="$HOME/lib/t2kmatch-2.0-jar-with-dependencies.jar"
+```
+2. Unzip the files in the data directory
+```bash
+gunzip data/dbpedia/*
+gunzip data/*.gz
+```
+3. Run the script
+```bash
+./scripts/run_t2k_match
+```
+
+## Acknowledgements
+
+This project is a re-implementation of the [original T2K Match algorithm](http://dws.informatik.uni-mannheim.de/en/research/T2K) developed at the [Data and Web Science Group](http://dws.informatik.uni-mannheim.de/) at the [University of Mannheim](http://www.uni-mannheim.de/) using the [WInte.r framework](https://github.com/olehmberg/winter).
 
 ## License
 
