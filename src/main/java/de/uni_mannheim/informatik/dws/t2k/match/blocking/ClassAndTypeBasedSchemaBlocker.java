@@ -8,12 +8,12 @@ import java.util.Set;
 import de.uni_mannheim.informatik.dws.t2k.match.data.KnowledgeBase;
 import de.uni_mannheim.informatik.dws.t2k.match.data.MatchableTableColumn;
 import de.uni_mannheim.informatik.dws.t2k.match.data.MatchableTableRow;
+import de.uni_mannheim.informatik.dws.winter.matching.blockers.AbstractBlocker;
 import de.uni_mannheim.informatik.dws.winter.matching.blockers.Blocker;
-import de.uni_mannheim.informatik.dws.winter.matching.blockers.CrossDataSetBlocker;
 import de.uni_mannheim.informatik.dws.winter.model.Correspondence;
 import de.uni_mannheim.informatik.dws.winter.model.DataSet;
+import de.uni_mannheim.informatik.dws.winter.model.Matchable;
 import de.uni_mannheim.informatik.dws.winter.model.Pair;
-import de.uni_mannheim.informatik.dws.winter.model.SimpleCorrespondence;
 import de.uni_mannheim.informatik.dws.winter.preprocessing.datatypes.DataType;
 import de.uni_mannheim.informatik.dws.winter.processing.DatasetIterator;
 import de.uni_mannheim.informatik.dws.winter.processing.Function;
@@ -29,8 +29,8 @@ import de.uni_mannheim.informatik.dws.winter.utils.MapUtils;
  *
  */
 public class ClassAndTypeBasedSchemaBlocker 
-	extends Blocker<MatchableTableColumn,MatchableTableColumn,MatchableTableRow> //<MatchableTableColumn, MatchableTableColumn, MatchableTableRow>
-	implements CrossDataSetBlocker<MatchableTableColumn, MatchableTableColumn, MatchableTableColumn, MatchableTableRow>
+	extends AbstractBlocker<MatchableTableColumn,MatchableTableColumn,MatchableTableRow> //<MatchableTableColumn, MatchableTableColumn, MatchableTableRow>
+	implements Blocker<MatchableTableColumn, MatchableTableColumn, MatchableTableColumn, MatchableTableRow>
 {
 
 	private Map<Integer, Set<String>> refinedClasses = new HashMap<Integer, Set<String>>();
@@ -64,7 +64,7 @@ public class ClassAndTypeBasedSchemaBlocker
 	public Processable<Correspondence<MatchableTableColumn, MatchableTableRow>> runBlocking(
 			DataSet<MatchableTableColumn, MatchableTableColumn> schema1,
 			DataSet<MatchableTableColumn, MatchableTableColumn> schema2,
-			final Processable<SimpleCorrespondence<MatchableTableRow>> instanceCorrespondences) {
+			final Processable<Correspondence<MatchableTableRow, Matchable>> instanceCorrespondences) {
 		
 		// schema1 - the web tables
 		// schema2 - dbpedia
@@ -213,24 +213,24 @@ public class ClassAndTypeBasedSchemaBlocker
 			}
 		};
 		
-		Function<String, SimpleCorrespondence<MatchableTableRow>> instanceCorrespondenceToTableIds = new Function<String, SimpleCorrespondence<MatchableTableRow>>() {
+		Function<String, Correspondence<MatchableTableRow, Matchable>> instanceCorrespondenceToTableIds = new Function<String, Correspondence<MatchableTableRow, Matchable>>() {
 
 			private static final long serialVersionUID = 1L;
 
 			@Override
-			public String execute(SimpleCorrespondence<MatchableTableRow> input) {
+			public String execute(Correspondence<MatchableTableRow, Matchable> input) {
 				return String.format("%d/%d", input.getFirstRecord().getTableId(), input.getSecondRecord().getTableId());
 			}
 		};
 		
 		// finally, we want to transform the result into objects of type BlockedMatchable
-		RecordMapper<Pair<Iterable<Pair<MatchableTableColumn, Pair<Integer, MatchableTableColumn>>>, Iterable<SimpleCorrespondence<MatchableTableRow>>>, Correspondence<MatchableTableColumn, MatchableTableRow>> blockedMatchableMapper = new RecordMapper<Pair<Iterable<Pair<MatchableTableColumn,Pair<Integer, MatchableTableColumn>>>,Iterable<SimpleCorrespondence<MatchableTableRow>>>, Correspondence<MatchableTableColumn,MatchableTableRow>>() {
+		RecordMapper<Pair<Iterable<Pair<MatchableTableColumn, Pair<Integer, MatchableTableColumn>>>, Iterable<Correspondence<MatchableTableRow, Matchable>>>, Correspondence<MatchableTableColumn, MatchableTableRow>> blockedMatchableMapper = new RecordMapper<Pair<Iterable<Pair<MatchableTableColumn,Pair<Integer, MatchableTableColumn>>>,Iterable<Correspondence<MatchableTableRow, Matchable>>>, Correspondence<MatchableTableColumn,MatchableTableRow>>() {
 			
 			private static final long serialVersionUID = 1L;
 
 			@Override
 			public void mapRecord(
-					Pair<Iterable<Pair<MatchableTableColumn, Pair<Integer, MatchableTableColumn>>>, Iterable<SimpleCorrespondence<MatchableTableRow>>> record,
+					Pair<Iterable<Pair<MatchableTableColumn, Pair<Integer, MatchableTableColumn>>>, Iterable<Correspondence<MatchableTableRow, Matchable>>> record,
 					DatasetIterator<Correspondence<MatchableTableColumn, MatchableTableRow>> resultCollector) {
 				
 				// record contains all data (column pairs and instance correspondences) for a combination of two tables
@@ -241,8 +241,8 @@ public class ClassAndTypeBasedSchemaBlocker
 					for(Pair<MatchableTableColumn, Pair<Integer, MatchableTableColumn>> columnPair : record.getFirst()) {
 						
 						// and then create a BlockedMatchable with all instance correspondences
-						Processable<SimpleCorrespondence<MatchableTableRow>> instanceCorrespondences = new ProcessableCollection<>();
-						for(SimpleCorrespondence<MatchableTableRow> cor : record.getSecond()) {
+						Processable<Correspondence<MatchableTableRow, Matchable>> instanceCorrespondences = new ProcessableCollection<>();
+						for(Correspondence<MatchableTableRow, Matchable> cor : record.getSecond()) {
 							instanceCorrespondences.add(cor);
 						}
 						

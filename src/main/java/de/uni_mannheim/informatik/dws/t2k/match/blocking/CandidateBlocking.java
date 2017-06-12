@@ -4,12 +4,12 @@ import java.io.Serializable;
 
 import de.uni_mannheim.informatik.dws.t2k.match.data.MatchableTableColumn;
 import de.uni_mannheim.informatik.dws.t2k.match.data.MatchableTableRow;
+import de.uni_mannheim.informatik.dws.winter.matching.blockers.AbstractBlocker;
 import de.uni_mannheim.informatik.dws.winter.matching.blockers.Blocker;
-import de.uni_mannheim.informatik.dws.winter.matching.blockers.CrossDataSetBlocker;
 import de.uni_mannheim.informatik.dws.winter.model.Correspondence;
 import de.uni_mannheim.informatik.dws.winter.model.DataSet;
+import de.uni_mannheim.informatik.dws.winter.model.Matchable;
 import de.uni_mannheim.informatik.dws.winter.model.Pair;
-import de.uni_mannheim.informatik.dws.winter.model.SimpleCorrespondence;
 import de.uni_mannheim.informatik.dws.winter.processing.DatasetIterator;
 import de.uni_mannheim.informatik.dws.winter.processing.Processable;
 import de.uni_mannheim.informatik.dws.winter.processing.ProcessableCollection;
@@ -24,8 +24,8 @@ import de.uni_mannheim.informatik.dws.winter.processing.RecordMapper;
  *
  */
 public class CandidateBlocking 
-	extends Blocker<MatchableTableRow,MatchableTableRow,MatchableTableColumn> //<MatchableTableRow, MatchableTableColumn, MatchableTableColumn> 
-	implements CrossDataSetBlocker<MatchableTableRow, MatchableTableColumn, MatchableTableRow, MatchableTableColumn>, Serializable
+	extends AbstractBlocker<MatchableTableRow,MatchableTableRow,MatchableTableColumn> //<MatchableTableRow, MatchableTableColumn, MatchableTableColumn> 
+	implements Blocker<MatchableTableRow, MatchableTableColumn, MatchableTableRow, MatchableTableColumn>, Serializable
 {
 
 	private static final long serialVersionUID = 1L;
@@ -43,24 +43,24 @@ public class CandidateBlocking
 	public Processable<Correspondence<MatchableTableRow, MatchableTableColumn>> runBlocking(
 			DataSet<MatchableTableRow, MatchableTableColumn> dataset1,
 			DataSet<MatchableTableRow, MatchableTableColumn> dataset2,
-			Processable<SimpleCorrespondence<MatchableTableColumn>> schemaCorrespondences) {
+			Processable<Correspondence<MatchableTableColumn, Matchable>> schemaCorrespondences) {
 		
 		// to get the matching schema correspondences, we have to join on both table ids
 		// as we want a list of all schema correspondences, we use coGroup instead of join (which gives us collections for all objects with the same grouping key)
 		Processable<Correspondence<MatchableTableRow, MatchableTableColumn>> result = correspondences.coGroup(schemaCorrespondences,
 				(Correspondence<MatchableTableRow, MatchableTableColumn> input) -> input.getFirstRecord().getTableId(),
-				(SimpleCorrespondence<MatchableTableColumn> input) -> input.getFirstRecord().getTableId(),
-				new RecordMapper<Pair<Iterable<Correspondence<MatchableTableRow, MatchableTableColumn>>, Iterable<SimpleCorrespondence<MatchableTableColumn>>>, Correspondence<MatchableTableRow, MatchableTableColumn>>() {
+				(Correspondence<MatchableTableColumn, Matchable> input) -> input.getFirstRecord().getTableId(),
+				new RecordMapper<Pair<Iterable<Correspondence<MatchableTableRow, MatchableTableColumn>>, Iterable<Correspondence<MatchableTableColumn, Matchable>>>, Correspondence<MatchableTableRow, MatchableTableColumn>>() {
 
 					private static final long serialVersionUID = 1L;
 
 					@Override
 					public void mapRecord(
-							Pair<Iterable<Correspondence<MatchableTableRow, MatchableTableColumn>>, Iterable<SimpleCorrespondence<MatchableTableColumn>>> record,
+							Pair<Iterable<Correspondence<MatchableTableRow, MatchableTableColumn>>, Iterable<Correspondence<MatchableTableColumn, Matchable>>> record,
 							DatasetIterator<Correspondence<MatchableTableRow, MatchableTableColumn>> resultCollector) {
-						Processable<SimpleCorrespondence<MatchableTableColumn>> result2 = new ProcessableCollection<>();
+						Processable<Correspondence<MatchableTableColumn, Matchable>> result2 = new ProcessableCollection<>();
 						
-						for(SimpleCorrespondence<MatchableTableColumn> ir : record.getSecond()) {
+						for(Correspondence<MatchableTableColumn, Matchable> ir : record.getSecond()) {
 							result2.add(ir);
 						}
 						

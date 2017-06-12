@@ -23,7 +23,8 @@ import de.uni_mannheim.informatik.dws.t2k.match.comparators.MatchableTableRowCom
 import de.uni_mannheim.informatik.dws.t2k.match.data.MatchableTableColumn;
 import de.uni_mannheim.informatik.dws.t2k.match.data.MatchableTableRow;
 import de.uni_mannheim.informatik.dws.winter.matching.rules.VotingMatchingRule;
-import de.uni_mannheim.informatik.dws.winter.model.SimpleCorrespondence;
+import de.uni_mannheim.informatik.dws.winter.model.Correspondence;
+import de.uni_mannheim.informatik.dws.winter.model.Matchable;
 import de.uni_mannheim.informatik.dws.winter.preprocessing.datatypes.DataType;
 
 /**
@@ -69,7 +70,7 @@ public class SchemaVotingRule extends VotingMatchingRule<MatchableTableColumn, M
 	 */
 	@Override
 	public double compare(MatchableTableColumn schemaElement1, MatchableTableColumn schemaElement2,
-			SimpleCorrespondence<MatchableTableRow> correspondence) {
+			Correspondence<MatchableTableRow, Matchable> correspondence) {
 		
 		// get the comparator for this data type
 		MatchableTableRowComparator<?> cmp = comparators.get(schemaElement1.getType());

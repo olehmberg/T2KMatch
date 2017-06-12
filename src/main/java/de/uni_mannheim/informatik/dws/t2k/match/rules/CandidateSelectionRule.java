@@ -5,7 +5,7 @@ import de.uni_mannheim.informatik.dws.t2k.match.data.MatchableTableRow;
 import de.uni_mannheim.informatik.dws.winter.matching.rules.Comparator;
 import de.uni_mannheim.informatik.dws.winter.matching.rules.FilteringMatchingRule;
 import de.uni_mannheim.informatik.dws.winter.model.Correspondence;
-import de.uni_mannheim.informatik.dws.winter.model.SimpleCorrespondence;
+import de.uni_mannheim.informatik.dws.winter.model.Matchable;
 import de.uni_mannheim.informatik.dws.winter.processing.Processable;
 
 /**
@@ -50,11 +50,11 @@ public class CandidateSelectionRule extends FilteringMatchingRule<MatchableTable
 	public Correspondence<MatchableTableRow, MatchableTableColumn> apply(
 			MatchableTableRow record1,
 			MatchableTableRow record2,
-			Processable<SimpleCorrespondence<MatchableTableColumn>> schemaCorrespondences) {
+			Processable<Correspondence<MatchableTableColumn, Matchable>> schemaCorrespondences) {
 		
 //		create schema correspondences between the key columns and rdfs:Label
-		SimpleCorrespondence<MatchableTableColumn> keyCorrespondence = null;
-		for(SimpleCorrespondence<MatchableTableColumn> cor :schemaCorrespondences.get()) {
+		Correspondence<MatchableTableColumn, Matchable> keyCorrespondence = null;
+		for(Correspondence<MatchableTableColumn, Matchable> cor :schemaCorrespondences.get()) {
 			if(cor.getSecondRecord().getColumnIndex()==rdfsLabelId) {
 				keyCorrespondence = cor;
 				break;
@@ -78,7 +78,7 @@ public class CandidateSelectionRule extends FilteringMatchingRule<MatchableTable
 	 */
 	@Override
 	public double compare(MatchableTableRow record1, MatchableTableRow record2,
-			SimpleCorrespondence<MatchableTableColumn> schemaCorrespondence) {
+			Correspondence<MatchableTableColumn, Matchable> schemaCorrespondence) {
 		return comparator.compare(record1, record2, schemaCorrespondence);
 	}
 

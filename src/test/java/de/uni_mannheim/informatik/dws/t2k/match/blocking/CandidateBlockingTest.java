@@ -60,7 +60,7 @@ public class CandidateBlockingTest extends TestCase {
 //		create blocker
 		CandidateBlocking blocker = new CandidateBlocking(correspondences);
 		
-		Processable<Correspondence<MatchableTableRow, MatchableTableColumn>> blockedPairs = blocker.runBlocking(dataset1, dataset2, Correspondence.simplify(schemaCorrespondences));
+		Processable<Correspondence<MatchableTableRow, MatchableTableColumn>> blockedPairs = blocker.runBlocking(dataset1, dataset2, Correspondence.toMatchable(schemaCorrespondences));
 		
 //		check for null pointer
 		assertNotNull(blockedPairs);

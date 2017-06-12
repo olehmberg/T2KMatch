@@ -5,6 +5,7 @@ import de.uni_mannheim.informatik.dws.t2k.match.data.MatchableTableColumn;
 import de.uni_mannheim.informatik.dws.t2k.match.data.MatchableTableRow;
 import de.uni_mannheim.informatik.dws.t2k.match.data.SurfaceForms;
 import de.uni_mannheim.informatik.dws.winter.model.Correspondence;
+import de.uni_mannheim.informatik.dws.winter.model.Matchable;
 import de.uni_mannheim.informatik.dws.winter.preprocessing.datatypes.DataType;
 import de.uni_mannheim.informatik.dws.winter.similarity.string.GeneralisedStringJaccard;
 import de.uni_mannheim.informatik.dws.winter.similarity.string.LevenshteinSimilarity;
@@ -27,7 +28,7 @@ public class KeyValueComparatorBasedOnSurfaceFormsTest extends TestCase {
 		MatchableTableColumn c2 = new MatchableTableColumn(1, 0, "label", DataType.string);	
 		
 //		create schema correspondence
-		Correspondence<MatchableTableColumn, MatchableTableRow> cor = new Correspondence<MatchableTableColumn, MatchableTableRow>(c1, c2, 1.0, null);
+		Correspondence<MatchableTableColumn, Matchable> cor = new Correspondence<MatchableTableColumn, Matchable>(c1, c2, 1.0, null);
 		
 		KeyValueComparatorBasedOnSurfaceForms cmp  = new KeyValueComparatorBasedOnSurfaceForms(new GeneralisedStringJaccard(new LevenshteinSimilarity(), 0.5, 0.25), 0, new SurfaceForms(null, null));
 		

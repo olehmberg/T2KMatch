@@ -24,12 +24,12 @@ import de.uni_mannheim.informatik.dws.t2k.index.dbpedia.KeyIndexLookup;
 import de.uni_mannheim.informatik.dws.t2k.match.data.MatchableTableColumn;
 import de.uni_mannheim.informatik.dws.t2k.match.data.MatchableTableRow;
 import de.uni_mannheim.informatik.dws.winter.index.IIndex;
+import de.uni_mannheim.informatik.dws.winter.matching.blockers.AbstractBlocker;
 import de.uni_mannheim.informatik.dws.winter.matching.blockers.Blocker;
-import de.uni_mannheim.informatik.dws.winter.matching.blockers.CrossDataSetBlocker;
 import de.uni_mannheim.informatik.dws.winter.model.Correspondence;
 import de.uni_mannheim.informatik.dws.winter.model.DataSet;
+import de.uni_mannheim.informatik.dws.winter.model.Matchable;
 import de.uni_mannheim.informatik.dws.winter.model.Pair;
-import de.uni_mannheim.informatik.dws.winter.model.SimpleCorrespondence;
 import de.uni_mannheim.informatik.dws.winter.model.Triple;
 import de.uni_mannheim.informatik.dws.winter.processing.DatasetIterator;
 import de.uni_mannheim.informatik.dws.winter.processing.Function;
@@ -45,8 +45,8 @@ import de.uni_mannheim.informatik.dws.winter.processing.RecordMapper;
  *
  */
 public class CandidateGenerationMultiKeyBlocker 
-	extends Blocker<MatchableTableRow,MatchableTableRow,MatchableTableColumn> //<MatchableTableRow, MatchableTableColumn, MatchableTableColumn> 
-	implements CrossDataSetBlocker<MatchableTableRow, MatchableTableColumn, MatchableTableRow, MatchableTableColumn>
+	extends AbstractBlocker<MatchableTableRow,MatchableTableRow,MatchableTableColumn> //<MatchableTableRow, MatchableTableColumn, MatchableTableColumn> 
+	implements Blocker<MatchableTableRow, MatchableTableColumn, MatchableTableRow, MatchableTableColumn>
 {
 
 	public CandidateGenerationMultiKeyBlocker(String indexLocation) {
@@ -97,7 +97,7 @@ public class CandidateGenerationMultiKeyBlocker
 	public Processable<Correspondence<MatchableTableRow, MatchableTableColumn>> runBlocking(
 			DataSet<MatchableTableRow, MatchableTableColumn> dataset1,
 			DataSet<MatchableTableRow, MatchableTableColumn> dataset2,
-			Processable<SimpleCorrespondence<MatchableTableColumn>> schemaCorrespondences) {
+			Processable<Correspondence<MatchableTableColumn, Matchable>> schemaCorrespondences) {
 		
 		// dataset1 web tables
 		// dataset2 dbpedia
@@ -126,19 +126,19 @@ public class CandidateGenerationMultiKeyBlocker
 //		};
 		
 		// this join results in: <web table row, schema correspondence>
-		Processable<Pair<MatchableTableRow, SimpleCorrespondence<MatchableTableColumn>>> rowsWithKeyCorrespondences 
+		Processable<Pair<MatchableTableRow, Correspondence<MatchableTableColumn, Matchable>>> rowsWithKeyCorrespondences 
 		= dataset1.join(schemaCorrespondences, webTableRowToTableId, 
-				(SimpleCorrespondence<MatchableTableColumn> input) -> input.getFirstRecord().getTableId());
+				(Correspondence<MatchableTableColumn, Matchable> input) -> input.getFirstRecord().getTableId());
 		
 		// now we can generate blocking keys for the web table rows with the schema correspondences and for the dbpedia rows
 		// as we can get multiple blocking keys for each row, we first transform the rows to a new dataset of rows with their blocking keys 
 		
-		RecordMapper<Pair<MatchableTableRow, SimpleCorrespondence<MatchableTableColumn>>, Triple<String, MatchableTableRow, SimpleCorrespondence<MatchableTableColumn>>> webTableRowBlockingFunction = new RecordMapper<Pair<MatchableTableRow,SimpleCorrespondence<MatchableTableColumn>>, Triple<String, MatchableTableRow, SimpleCorrespondence<MatchableTableColumn>>>() {
+		RecordMapper<Pair<MatchableTableRow, Correspondence<MatchableTableColumn, Matchable>>, Triple<String, MatchableTableRow, Correspondence<MatchableTableColumn, Matchable>>> webTableRowBlockingFunction = new RecordMapper<Pair<MatchableTableRow,Correspondence<MatchableTableColumn, Matchable>>, Triple<String, MatchableTableRow, Correspondence<MatchableTableColumn, Matchable>>>() {
 			private static final long serialVersionUID = 1L;
 
 			@Override
-			public void mapRecord(Pair<MatchableTableRow, SimpleCorrespondence<MatchableTableColumn>> record,
-					DatasetIterator<Triple<String, MatchableTableRow, SimpleCorrespondence<MatchableTableColumn>>> resultCollector) {
+			public void mapRecord(Pair<MatchableTableRow, Correspondence<MatchableTableColumn, Matchable>> record,
+					DatasetIterator<Triple<String, MatchableTableRow, Correspondence<MatchableTableColumn, Matchable>>> resultCollector) {
 				// key the row's key value
 				Object keyValue = record.getFirst().get(record.getSecond().getFirstRecord().getColumnIndex());
 				
@@ -150,7 +150,7 @@ public class CandidateGenerationMultiKeyBlocker
 			}
 		};
 		
-		Processable<Triple<String, MatchableTableRow, SimpleCorrespondence<MatchableTableColumn>>> blockedWebTableRows = rowsWithKeyCorrespondences.transform(webTableRowBlockingFunction);
+		Processable<Triple<String, MatchableTableRow, Correspondence<MatchableTableColumn, Matchable>>> blockedWebTableRows = rowsWithKeyCorrespondences.transform(webTableRowBlockingFunction);
 		
 		// now generate the blocking keys for the dbpedia rows
 		RecordMapper<MatchableTableRow, Pair<String, MatchableTableRow>> dbpediaRowBlockingFunction = new RecordMapper<MatchableTableRow, Pair<String,MatchableTableRow>>() {
@@ -189,22 +189,22 @@ public class CandidateGenerationMultiKeyBlocker
 //			}
 //		};
 	
-		Processable<Pair<Triple<String, MatchableTableRow, SimpleCorrespondence<MatchableTableColumn>>, Pair<String, MatchableTableRow>>> blocks = 
+		Processable<Pair<Triple<String, MatchableTableRow, Correspondence<MatchableTableColumn, Matchable>>, Pair<String, MatchableTableRow>>> blocks = 
 				blockedWebTableRows.join(blockedDBpediaRows, 
-						(Triple<String, MatchableTableRow, SimpleCorrespondence<MatchableTableColumn>> input) -> input.getFirst(), 
+						(Triple<String, MatchableTableRow, Correspondence<MatchableTableColumn, Matchable>> input) -> input.getFirst(), 
 						(Pair<String, MatchableTableRow> input) -> input.getFirst());
 		
 		// finally, transform the data into BlockedMatchable
 		
-		RecordMapper<Pair<Triple<String, MatchableTableRow, SimpleCorrespondence<MatchableTableColumn>>, Pair<String, MatchableTableRow>>, Correspondence<MatchableTableRow, MatchableTableColumn>> blockedMatchableTransformation = new RecordMapper<Pair<Triple<String, MatchableTableRow, SimpleCorrespondence<MatchableTableColumn>>,Pair<String,MatchableTableRow>>, Correspondence<MatchableTableRow,MatchableTableColumn>>() {
+		RecordMapper<Pair<Triple<String, MatchableTableRow, Correspondence<MatchableTableColumn, Matchable>>, Pair<String, MatchableTableRow>>, Correspondence<MatchableTableRow, MatchableTableColumn>> blockedMatchableTransformation = new RecordMapper<Pair<Triple<String, MatchableTableRow, Correspondence<MatchableTableColumn, Matchable>>,Pair<String,MatchableTableRow>>, Correspondence<MatchableTableRow,MatchableTableColumn>>() {
 			
 			private static final long serialVersionUID = 1L;
 
 			@Override
-			public void mapRecord(Pair<Triple<String, MatchableTableRow, SimpleCorrespondence<MatchableTableColumn>>, Pair<String, MatchableTableRow>> record,
+			public void mapRecord(Pair<Triple<String, MatchableTableRow, Correspondence<MatchableTableColumn, Matchable>>, Pair<String, MatchableTableRow>> record,
 					DatasetIterator<Correspondence<MatchableTableRow, MatchableTableColumn>> resultCollector) {
 			
-				Processable<SimpleCorrespondence<MatchableTableColumn>> correspondences = new ProcessableCollection<>();
+				Processable<Correspondence<MatchableTableColumn, Matchable>> correspondences = new ProcessableCollection<>();
 				correspondences.add(record.getFirst().getThird());
 				resultCollector.next(new Correspondence<MatchableTableRow, MatchableTableColumn>(
 						record.getFirst().getSecond(), 

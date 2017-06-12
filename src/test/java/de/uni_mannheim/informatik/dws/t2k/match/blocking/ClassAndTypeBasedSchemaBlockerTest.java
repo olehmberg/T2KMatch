@@ -65,7 +65,7 @@ public class ClassAndTypeBasedSchemaBlockerTest extends TestCase {
 		assertNotNull(blocker.getKb());
 		assertNotNull(blocker.getRefinedClasses());
 		
-		Processable<Correspondence<MatchableTableColumn, MatchableTableRow>> blockedPairs = blocker.runBlocking(wb.getSchema(), kb.getSchema(), Correspondence.simplify(schemaCorrespondences));
+		Processable<Correspondence<MatchableTableColumn, MatchableTableRow>> blockedPairs = blocker.runBlocking(wb.getSchema(), kb.getSchema(), Correspondence.toMatchable(schemaCorrespondences));
 
 //		check for null pointer
 		assertNotNull(blockedPairs);

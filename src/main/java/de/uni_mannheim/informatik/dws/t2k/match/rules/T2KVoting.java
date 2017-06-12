@@ -21,7 +21,7 @@ import de.uni_mannheim.informatik.dws.t2k.match.data.MatchableTableColumn;
 import de.uni_mannheim.informatik.dws.t2k.match.data.MatchableTableRow;
 import de.uni_mannheim.informatik.dws.winter.matching.aggregators.VotingAggregator;
 import de.uni_mannheim.informatik.dws.winter.model.Correspondence;
-import de.uni_mannheim.informatik.dws.winter.model.SimpleCorrespondence;
+import de.uni_mannheim.informatik.dws.winter.model.Matchable;
 import de.uni_mannheim.informatik.dws.winter.utils.query.Q;
 
 /**
@@ -44,7 +44,7 @@ public class T2KVoting extends VotingAggregator<MatchableTableColumn, MatchableT
 		// cor represents a single vote
 		// we weight the similarity with the similarity of the duplicate that produced this vote (stored in causalCorrespondences)
 		
-		SimpleCorrespondence<MatchableTableRow> cause = Q.firstOrDefault(cor.getCausalCorrespondences().get());
+		Correspondence<MatchableTableRow, Matchable> cause = Q.firstOrDefault(cor.getCausalCorrespondences().get());
 		
 		if(cause==null) {
 			// does not make sense, no duplicate created this vote

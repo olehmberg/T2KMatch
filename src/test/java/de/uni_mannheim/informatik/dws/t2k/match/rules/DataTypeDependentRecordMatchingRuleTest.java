@@ -102,9 +102,9 @@ public class DataTypeDependentRecordMatchingRuleTest extends TestCase {
 		assertNotNull(rule1.getRdfsLabelId());
 		
 //		check for return value of rule
-		assertNotNull(rule1.apply(wr1, kr1, Correspondence.simplify(schemaCorrespondence)));
-		assertNull(rule1.apply(wr1, kr2, Correspondence.simplify(schemaCorrespondence)));
-		assertNull(rule1.apply(wr2, kr1, Correspondence.simplify(schemaCorrespondence)));
+		assertNotNull(rule1.apply(wr1, kr1, Correspondence.toMatchable(schemaCorrespondence)));
+		assertNull(rule1.apply(wr1, kr2, Correspondence.toMatchable(schemaCorrespondence)));
+		assertNull(rule1.apply(wr2, kr1, Correspondence.toMatchable(schemaCorrespondence)));
 		
 //		create rule
 		DataTypeDependentRecordMatchingRule rule2 = new DataTypeDependentRecordMatchingRule(0.25, 0);
@@ -120,9 +120,9 @@ public class DataTypeDependentRecordMatchingRuleTest extends TestCase {
 		assertNotNull(rule2.getRdfsLabelId());
 		
 //		check for return value of rule
-		assertNotNull(rule2.apply(wr1, kr1, Correspondence.simplify(schemaCorrespondence)));
-		assertNotNull(rule2.apply(wr1, kr2, Correspondence.simplify(schemaCorrespondence)));
-		assertNull(rule2.apply(wr2, kr1, Correspondence.simplify(schemaCorrespondence)));
+		assertNotNull(rule2.apply(wr1, kr1, Correspondence.toMatchable(schemaCorrespondence)));
+		assertNotNull(rule2.apply(wr1, kr2, Correspondence.toMatchable(schemaCorrespondence)));
+		assertNull(rule2.apply(wr2, kr1, Correspondence.toMatchable(schemaCorrespondence)));
 
 	}
 }

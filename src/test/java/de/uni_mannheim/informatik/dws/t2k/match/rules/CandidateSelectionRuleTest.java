@@ -44,8 +44,8 @@ public class CandidateSelectionRuleTest extends TestCase {
 //		create the comparator and add it to the rule
 		KeyValueComparatorBasedOnSurfaceForms cmp1  = new KeyValueComparatorBasedOnSurfaceForms(new GeneralisedStringJaccard(new LevenshteinSimilarity(), 0.5, 0.25), 0, new SurfaceForms(null, null));
 		rule1.setComparator(cmp1);
-		assertNotNull(rule1.apply(r1, r2, Correspondence.simplify(schemaCorrespondence)));
-		assertNull(rule1.apply(r3, r4, Correspondence.simplify(schemaCorrespondence)));
+		assertNotNull(rule1.apply(r1, r2, Correspondence.toMatchable(schemaCorrespondence)));
+		assertNull(rule1.apply(r3, r4, Correspondence.toMatchable(schemaCorrespondence)));
 
 //		check for parameters
 		assertNotNull(rule1.getComparator());
@@ -57,9 +57,9 @@ public class CandidateSelectionRuleTest extends TestCase {
 //		create the comparator and add it to the rule
 		KeyValueComparatorBasedOnSurfaceForms cmp2  = new KeyValueComparatorBasedOnSurfaceForms(new GeneralisedStringJaccard(new LevenshteinSimilarity(), 0.5, 0.25), 0, new SurfaceForms(null, null));
 		rule2.setComparator(cmp2);
-		assertNotNull(rule2.apply(r1, r3, Correspondence.simplify(schemaCorrespondence)));
-		assertNull(rule2.apply(r1, r2, Correspondence.simplify(schemaCorrespondence)));
-		assertNull(rule2.apply(r3, r4, Correspondence.simplify(schemaCorrespondence)));
+		assertNotNull(rule2.apply(r1, r3, Correspondence.toMatchable(schemaCorrespondence)));
+		assertNull(rule2.apply(r1, r2, Correspondence.toMatchable(schemaCorrespondence)));
+		assertNull(rule2.apply(r3, r4, Correspondence.toMatchable(schemaCorrespondence)));
 		
 //		check for parameters
 		assertNotNull(rule2.getComparator());

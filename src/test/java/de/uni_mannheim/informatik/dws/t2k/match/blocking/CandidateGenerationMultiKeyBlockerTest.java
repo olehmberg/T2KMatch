@@ -74,7 +74,7 @@ public class CandidateGenerationMultiKeyBlockerTest extends TestCase {
 		assertNotNull(blocker.getMaxEditDistance());
 		assertNotNull(blocker.getNumCandidates());
 		
-		Processable<Correspondence<MatchableTableRow, MatchableTableColumn>> blockedPairs = blocker.runBlocking(dataset1, dataset2, Correspondence.simplify(schemaCorrespondences));
+		Processable<Correspondence<MatchableTableRow, MatchableTableColumn>> blockedPairs = blocker.runBlocking(dataset1, dataset2, Correspondence.toMatchable(schemaCorrespondences));
 		
 //		check for null pointer
 		assertNotNull(blockedPairs);

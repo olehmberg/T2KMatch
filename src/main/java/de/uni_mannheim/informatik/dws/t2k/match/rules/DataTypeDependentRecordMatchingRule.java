@@ -8,7 +8,7 @@ import de.uni_mannheim.informatik.dws.t2k.match.data.MatchableTableRow;
 import de.uni_mannheim.informatik.dws.winter.matching.rules.Comparator;
 import de.uni_mannheim.informatik.dws.winter.matching.rules.FilteringMatchingRule;
 import de.uni_mannheim.informatik.dws.winter.model.Correspondence;
-import de.uni_mannheim.informatik.dws.winter.model.SimpleCorrespondence;
+import de.uni_mannheim.informatik.dws.winter.model.Matchable;
 import de.uni_mannheim.informatik.dws.winter.preprocessing.datatypes.DataType;
 import de.uni_mannheim.informatik.dws.winter.processing.Processable;
 
@@ -81,12 +81,12 @@ public class DataTypeDependentRecordMatchingRule extends FilteringMatchingRule<M
 	public Correspondence<MatchableTableRow, MatchableTableColumn> apply(
 			MatchableTableRow record1,
 			MatchableTableRow record2,
-			Processable<SimpleCorrespondence<MatchableTableColumn>> schemaCorrespondences) {
+			Processable<Correspondence<MatchableTableColumn, Matchable>> schemaCorrespondences) {
 		double sum = 0.0;
 		double sumOfWeights = 0.0;
 
 		// sum up the similarity scores for all properties
-		for(SimpleCorrespondence<MatchableTableColumn> sc : schemaCorrespondences.get()) {
+		for(Correspondence<MatchableTableColumn, Matchable> sc : schemaCorrespondences.get()) {
 			
 			double sim = compare(record1, record2, sc);
 			
@@ -145,7 +145,7 @@ public class DataTypeDependentRecordMatchingRule extends FilteringMatchingRule<M
 	 */
 	@Override
 	public double compare(MatchableTableRow record1, MatchableTableRow record2,
-			SimpleCorrespondence<MatchableTableColumn> schemaCorrespondence) {
+			Correspondence<MatchableTableColumn, Matchable> schemaCorrespondence) {
 		if(schemaCorrespondence.getSecondRecord().getColumnIndex()!=rdfsLabelId) {
 			MatchableTableRowComparator<?> cmp = comparators.get(record1.getType(schemaCorrespondence.getFirstRecord().getColumnIndex()));
 			if(cmp!=null) {

@@ -7,7 +7,8 @@ import de.uni_mannheim.informatik.dws.t2k.match.data.MatchableTableColumn;
 import de.uni_mannheim.informatik.dws.t2k.match.data.MatchableTableRow;
 import de.uni_mannheim.informatik.dws.t2k.match.data.SurfaceForms;
 import de.uni_mannheim.informatik.dws.winter.matching.rules.Comparator;
-import de.uni_mannheim.informatik.dws.winter.model.SimpleCorrespondence;
+import de.uni_mannheim.informatik.dws.winter.model.Correspondence;
+import de.uni_mannheim.informatik.dws.winter.model.Matchable;
 import de.uni_mannheim.informatik.dws.winter.similarity.SimilarityMeasure;
 
 /**
@@ -62,7 +63,7 @@ public class KeyValueComparatorBasedOnSurfaceForms implements Comparator<Matchab
 	public double compare(
 			MatchableTableRow record1,
 			MatchableTableRow record2,
-			SimpleCorrespondence<MatchableTableColumn> schemaCorrespondences) {
+			Correspondence<MatchableTableColumn, Matchable> schemaCorrespondences) {
 		
 		if(schemaCorrespondences==null) {
 			return 0.0;
