@@ -29,7 +29,7 @@ import de.uni_mannheim.informatik.dws.t2k.match.data.WebTables;
 import de.uni_mannheim.informatik.dws.winter.model.Correspondence;
 import de.uni_mannheim.informatik.dws.winter.model.Pair;
 import de.uni_mannheim.informatik.dws.winter.preprocessing.datatypes.DataType;
-import de.uni_mannheim.informatik.dws.winter.processing.DatasetIterator;
+import de.uni_mannheim.informatik.dws.winter.processing.DataIterator;
 import de.uni_mannheim.informatik.dws.winter.processing.Function;
 import de.uni_mannheim.informatik.dws.winter.processing.Processable;
 import de.uni_mannheim.informatik.dws.winter.processing.RecordKeyValueMapper;
@@ -117,7 +117,7 @@ public class TripleGenerator {
 			@Override
 			public void mapRecord(
 					Pair<Iterable<Correspondence<MatchableTableRow, MatchableTableColumn>>, Iterable<Correspondence<MatchableTableColumn, MatchableTableRow>>> record,
-					DatasetIterator<ExtractedTriple> resultCollector) {
+					DataIterator<ExtractedTriple> resultCollector) {
 				
 				Correspondence<MatchableTableColumn, MatchableTableRow> key = null;
 				
@@ -208,7 +208,7 @@ public class TripleGenerator {
 			private static final long serialVersionUID = 1L;
 
 			@Override
-			public void mapRecordToKey(ExtractedTriple record, DatasetIterator<Pair<Boolean, ExtractedTriple>> resultCollector) {
+			public void mapRecordToKey(ExtractedTriple record, DataIterator<Pair<Boolean, ExtractedTriple>> resultCollector) {
 				
 				boolean isNew = record.getObjectValue()!=null && record.getObjectValueInKB()==null;
 			
@@ -233,7 +233,7 @@ public class TripleGenerator {
 			private static final long serialVersionUID = 1L;
 
 			@Override
-			public void mapRecordToKey(ExtractedTriple record, DatasetIterator<Pair<Boolean, ExtractedTriple>> resultCollector) {
+			public void mapRecordToKey(ExtractedTriple record, DataIterator<Pair<Boolean, ExtractedTriple>> resultCollector) {
 				
 				boolean isCorrect = record.getObjectValue()!=null && record.getObjectValueInKB()!=null && record.getEvaluatedSimilarity() > 0.0;
 			

@@ -10,7 +10,7 @@ import de.uni_mannheim.informatik.dws.winter.model.Correspondence;
 import de.uni_mannheim.informatik.dws.winter.model.DataSet;
 import de.uni_mannheim.informatik.dws.winter.model.Matchable;
 import de.uni_mannheim.informatik.dws.winter.model.Pair;
-import de.uni_mannheim.informatik.dws.winter.processing.DatasetIterator;
+import de.uni_mannheim.informatik.dws.winter.processing.DataIterator;
 import de.uni_mannheim.informatik.dws.winter.processing.Processable;
 import de.uni_mannheim.informatik.dws.winter.processing.ProcessableCollection;
 import de.uni_mannheim.informatik.dws.winter.processing.RecordMapper;
@@ -57,7 +57,7 @@ public class CandidateBlocking
 					@Override
 					public void mapRecord(
 							Pair<Iterable<Correspondence<MatchableTableRow, MatchableTableColumn>>, Iterable<Correspondence<MatchableTableColumn, Matchable>>> record,
-							DatasetIterator<Correspondence<MatchableTableRow, MatchableTableColumn>> resultCollector) {
+							DataIterator<Correspondence<MatchableTableRow, MatchableTableColumn>> resultCollector) {
 						Processable<Correspondence<MatchableTableColumn, Matchable>> result2 = new ProcessableCollection<>();
 						
 						for(Correspondence<MatchableTableColumn, Matchable> ir : record.getSecond()) {

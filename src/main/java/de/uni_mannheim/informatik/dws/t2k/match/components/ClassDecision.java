@@ -16,7 +16,7 @@ import de.uni_mannheim.informatik.dws.t2k.match.data.MatchableTableRow;
 import de.uni_mannheim.informatik.dws.winter.matching.MatchingEngine;
 import de.uni_mannheim.informatik.dws.winter.model.Correspondence;
 import de.uni_mannheim.informatik.dws.winter.model.Pair;
-import de.uni_mannheim.informatik.dws.winter.processing.DatasetIterator;
+import de.uni_mannheim.informatik.dws.winter.processing.DataIterator;
 import de.uni_mannheim.informatik.dws.winter.processing.Processable;
 import de.uni_mannheim.informatik.dws.winter.processing.aggregators.DistributionAggregator;
 import de.uni_mannheim.informatik.dws.winter.utils.Distribution;
@@ -49,7 +49,7 @@ public class ClassDecision implements Serializable{
 
 		instanceCorrespondences = instanceCorrespondences.transform( 
 			(Correspondence<MatchableTableRow, MatchableTableColumn> record,
-				DatasetIterator<Correspondence<MatchableTableRow, MatchableTableColumn>> resultCollector) ->
+				DataIterator<Correspondence<MatchableTableRow, MatchableTableColumn>> resultCollector) ->
 			{
 				if(classWeight.containsKey(record.getSecondRecord().getTableId())){
 					record.setsimilarityScore(record.getSimilarityScore() + classWeight.get(record.getSecondRecord().getTableId()));
@@ -80,7 +80,7 @@ public class ClassDecision implements Serializable{
 		Processable<Pair<Integer, Distribution<Integer>>> candidates = correspondences.aggregateRecords(
 			// map each instance correspondence to its table id (= group by input table)
 			(Correspondence<MatchableTableRow, MatchableTableColumn> record,
-				DatasetIterator<Pair<Integer, Correspondence<MatchableTableRow, MatchableTableColumn>>> resultCollector) ->
+				DataIterator<Pair<Integer, Correspondence<MatchableTableRow, MatchableTableColumn>>> resultCollector) ->
 			{
 				resultCollector.next(new Pair<Integer, Correspondence<MatchableTableRow,MatchableTableColumn>>(record.getFirstRecord().getTableId(), record));
 			}, 

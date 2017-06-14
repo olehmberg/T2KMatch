@@ -21,7 +21,7 @@ import de.uni_mannheim.informatik.dws.t2k.match.data.MatchableTableColumn;
 import de.uni_mannheim.informatik.dws.t2k.match.data.MatchableTableRow;
 import de.uni_mannheim.informatik.dws.winter.model.Correspondence;
 import de.uni_mannheim.informatik.dws.winter.model.Pair;
-import de.uni_mannheim.informatik.dws.winter.processing.DatasetIterator;
+import de.uni_mannheim.informatik.dws.winter.processing.DataIterator;
 import de.uni_mannheim.informatik.dws.winter.processing.RecordMapper;
 
 /**
@@ -49,7 +49,7 @@ public class WebTableKeyToRdfsLabelCorrespondenceGenerator implements RecordMapp
 	 */
 	@Override
 	public void mapRecord(Pair<Integer, MatchableTableColumn> record,
-			DatasetIterator<Correspondence<MatchableTableColumn, MatchableTableRow>> resultCollector) {
+			DataIterator<Correspondence<MatchableTableColumn, MatchableTableRow>> resultCollector) {
 		
 		resultCollector.next(new Correspondence<MatchableTableColumn, MatchableTableRow>(record.getSecond(), rdfsLabel, 1.0, null));
 		

@@ -4,7 +4,7 @@ import de.uni_mannheim.informatik.dws.t2k.match.data.MatchableTableColumn;
 import de.uni_mannheim.informatik.dws.t2k.match.data.MatchableTableRow;
 import de.uni_mannheim.informatik.dws.winter.model.Correspondence;
 import de.uni_mannheim.informatik.dws.winter.model.Pair;
-import de.uni_mannheim.informatik.dws.winter.processing.DatasetIterator;
+import de.uni_mannheim.informatik.dws.winter.processing.DataIterator;
 import de.uni_mannheim.informatik.dws.winter.processing.RecordKeyValueMapper;
 
 /**
@@ -21,7 +21,7 @@ public class GroupCorrespondencesRecordKeyMapper implements RecordKeyValueMapper
 	@Override
 	public void mapRecordToKey(
 			Correspondence<MatchableTableColumn, MatchableTableRow> record,
-			DatasetIterator<Pair<String, Correspondence<MatchableTableColumn, MatchableTableRow>>> resultCollector) {
+			DataIterator<Pair<String, Correspondence<MatchableTableColumn, MatchableTableRow>>> resultCollector) {
 		resultCollector.next(new Pair<String, Correspondence<MatchableTableColumn,MatchableTableRow>>((record.getFirstRecord().getIdentifier() + record.getSecondRecord().getIdentifier()), record));
 	}
 

@@ -31,7 +31,7 @@ import de.uni_mannheim.informatik.dws.winter.model.DataSet;
 import de.uni_mannheim.informatik.dws.winter.model.Matchable;
 import de.uni_mannheim.informatik.dws.winter.model.Pair;
 import de.uni_mannheim.informatik.dws.winter.model.Triple;
-import de.uni_mannheim.informatik.dws.winter.processing.DatasetIterator;
+import de.uni_mannheim.informatik.dws.winter.processing.DataIterator;
 import de.uni_mannheim.informatik.dws.winter.processing.Function;
 import de.uni_mannheim.informatik.dws.winter.processing.Processable;
 import de.uni_mannheim.informatik.dws.winter.processing.ProcessableCollection;
@@ -138,7 +138,7 @@ public class CandidateGenerationMultiKeyBlocker
 
 			@Override
 			public void mapRecord(Pair<MatchableTableRow, Correspondence<MatchableTableColumn, Matchable>> record,
-					DatasetIterator<Triple<String, MatchableTableRow, Correspondence<MatchableTableColumn, Matchable>>> resultCollector) {
+					DataIterator<Triple<String, MatchableTableRow, Correspondence<MatchableTableColumn, Matchable>>> resultCollector) {
 				// key the row's key value
 				Object keyValue = record.getFirst().get(record.getSecond().getFirstRecord().getColumnIndex());
 				
@@ -158,7 +158,7 @@ public class CandidateGenerationMultiKeyBlocker
 			private static final long serialVersionUID = 1L;
 
 			@Override
-			public void mapRecord(MatchableTableRow record, DatasetIterator<Pair<String, MatchableTableRow>> resultCollector) {
+			public void mapRecord(MatchableTableRow record, DataIterator<Pair<String, MatchableTableRow>> resultCollector) {
 				
 				// simply return the URI
 				
@@ -202,7 +202,7 @@ public class CandidateGenerationMultiKeyBlocker
 
 			@Override
 			public void mapRecord(Pair<Triple<String, MatchableTableRow, Correspondence<MatchableTableColumn, Matchable>>, Pair<String, MatchableTableRow>> record,
-					DatasetIterator<Correspondence<MatchableTableRow, MatchableTableColumn>> resultCollector) {
+					DataIterator<Correspondence<MatchableTableRow, MatchableTableColumn>> resultCollector) {
 			
 				Processable<Correspondence<MatchableTableColumn, Matchable>> correspondences = new ProcessableCollection<>();
 				correspondences.add(record.getFirst().getThird());

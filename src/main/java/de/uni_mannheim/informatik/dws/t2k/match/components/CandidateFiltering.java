@@ -23,7 +23,7 @@ import java.util.Set;
 import de.uni_mannheim.informatik.dws.t2k.match.data.MatchableTableColumn;
 import de.uni_mannheim.informatik.dws.t2k.match.data.MatchableTableRow;
 import de.uni_mannheim.informatik.dws.winter.model.Correspondence;
-import de.uni_mannheim.informatik.dws.winter.processing.DatasetIterator;
+import de.uni_mannheim.informatik.dws.winter.processing.DataIterator;
 import de.uni_mannheim.informatik.dws.winter.processing.Processable;
 import de.uni_mannheim.informatik.dws.winter.processing.RecordMapper;
 
@@ -57,7 +57,7 @@ public class CandidateFiltering {
 
 			@Override
 			public void mapRecord(Correspondence<MatchableTableRow, MatchableTableColumn> record,
-					DatasetIterator<Correspondence<MatchableTableRow, MatchableTableColumn>> resultCollector) {
+					DataIterator<Correspondence<MatchableTableRow, MatchableTableColumn>> resultCollector) {
 
 				// get the class name of the candidate
 				String className = classIndices.get(record.getSecondRecord().getTableId()); 

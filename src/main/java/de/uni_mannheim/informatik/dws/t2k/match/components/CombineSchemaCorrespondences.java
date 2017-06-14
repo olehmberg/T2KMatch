@@ -24,7 +24,7 @@ import de.uni_mannheim.informatik.dws.t2k.match.recordmapper.GroupCorrespondence
 import de.uni_mannheim.informatik.dws.t2k.match.recordmapper.SumCorrespondenceSimilarityAggregator;
 import de.uni_mannheim.informatik.dws.winter.model.Correspondence;
 import de.uni_mannheim.informatik.dws.winter.model.Pair;
-import de.uni_mannheim.informatik.dws.winter.processing.DatasetIterator;
+import de.uni_mannheim.informatik.dws.winter.processing.DataIterator;
 import de.uni_mannheim.informatik.dws.winter.processing.Processable;
 import de.uni_mannheim.informatik.dws.winter.processing.RecordMapper;
 
@@ -105,7 +105,7 @@ public class CombineSchemaCorrespondences {
 
 			@Override
 			public void mapRecord(Pair<String, Correspondence<MatchableTableColumn, MatchableTableRow>> record,
-					DatasetIterator<Correspondence<MatchableTableColumn, MatchableTableRow>> resultCollector) {
+					DataIterator<Correspondence<MatchableTableColumn, MatchableTableRow>> resultCollector) {
 				if(record.getSecond().getSimilarityScore()>=finalPropertySimilarityThreshold) {
 					resultCollector.next(record.getSecond());
 				}

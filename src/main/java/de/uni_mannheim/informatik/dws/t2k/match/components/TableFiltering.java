@@ -27,7 +27,7 @@ import de.uni_mannheim.informatik.dws.t2k.match.data.MatchableTableRow;
 import de.uni_mannheim.informatik.dws.t2k.match.data.WebTables;
 import de.uni_mannheim.informatik.dws.winter.model.Correspondence;
 import de.uni_mannheim.informatik.dws.winter.model.Pair;
-import de.uni_mannheim.informatik.dws.winter.processing.DatasetIterator;
+import de.uni_mannheim.informatik.dws.winter.processing.DataIterator;
 import de.uni_mannheim.informatik.dws.winter.processing.Function;
 import de.uni_mannheim.informatik.dws.winter.processing.Processable;
 import de.uni_mannheim.informatik.dws.winter.processing.RecordKeyValueMapper;
@@ -107,7 +107,7 @@ public class TableFiltering {
 			private static final long serialVersionUID = 1L;
 
 			@Override
-			public void mapRecordToKey(MatchableTableRow record, DatasetIterator<Pair<Integer, MatchableTableRow>> resultCollector) {
+			public void mapRecordToKey(MatchableTableRow record, DataIterator<Pair<Integer, MatchableTableRow>> resultCollector) {
 				resultCollector.next(new Pair<Integer, MatchableTableRow>(record.getTableId(), record));
 			}
 		};
@@ -123,7 +123,7 @@ public class TableFiltering {
 
 			@Override
 			public void mapRecordToKey(Correspondence<MatchableTableRow, MatchableTableColumn> record,
-					DatasetIterator<Pair<Integer, Correspondence<MatchableTableRow, MatchableTableColumn>>> resultCollector) {
+					DataIterator<Pair<Integer, Correspondence<MatchableTableRow, MatchableTableColumn>>> resultCollector) {
 				resultCollector.next(new Pair<Integer, Correspondence<MatchableTableRow,MatchableTableColumn>>(record.getFirstRecord().getTableId(), record));
 			}
 		};
@@ -153,7 +153,7 @@ public class TableFiltering {
 
 			@Override
 			public void mapRecord(Pair<Pair<Integer, Integer>, Pair<Integer, Integer>> record,
-					DatasetIterator<Pair<Integer, Double>> resultCollector) {
+					DataIterator<Pair<Integer, Double>> resultCollector) {
 				
 				int tableId = record.getFirst().getFirst();
 				int records = record.getFirst().getSecond();
@@ -225,7 +225,7 @@ public class TableFiltering {
 
 			@Override
 			public void mapRecord(Pair<Correspondence<MatchableTableRow, MatchableTableColumn>, Pair<Integer, Double>> record,
-					DatasetIterator<Correspondence<MatchableTableRow, MatchableTableColumn>> resultCollector) {
+					DataIterator<Correspondence<MatchableTableRow, MatchableTableColumn>> resultCollector) {
 				resultCollector.next(record.getFirst());
 			}
 		};
@@ -268,7 +268,7 @@ public class TableFiltering {
 
 			@Override
 			public void mapRecord(Pair<Correspondence<MatchableTableColumn, MatchableTableRow>, Pair<Integer, Double>> record,
-					DatasetIterator<Correspondence<MatchableTableColumn, MatchableTableRow>> resultCollector) {
+					DataIterator<Correspondence<MatchableTableColumn, MatchableTableRow>> resultCollector) {
 				resultCollector.next(record.getFirst());
 			}
 		};

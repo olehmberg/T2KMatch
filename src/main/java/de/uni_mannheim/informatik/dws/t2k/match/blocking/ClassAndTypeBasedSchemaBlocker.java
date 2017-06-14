@@ -15,7 +15,7 @@ import de.uni_mannheim.informatik.dws.winter.model.DataSet;
 import de.uni_mannheim.informatik.dws.winter.model.Matchable;
 import de.uni_mannheim.informatik.dws.winter.model.Pair;
 import de.uni_mannheim.informatik.dws.winter.preprocessing.datatypes.DataType;
-import de.uni_mannheim.informatik.dws.winter.processing.DatasetIterator;
+import de.uni_mannheim.informatik.dws.winter.processing.DataIterator;
 import de.uni_mannheim.informatik.dws.winter.processing.Function;
 import de.uni_mannheim.informatik.dws.winter.processing.Processable;
 import de.uni_mannheim.informatik.dws.winter.processing.ProcessableCollection;
@@ -153,7 +153,7 @@ public class ClassAndTypeBasedSchemaBlocker
 
 			@Override
 			public void mapRecord(MatchableTableColumn record,
-					DatasetIterator<Pair<Integer, MatchableTableColumn>> resultCollector) {
+					DataIterator<Pair<Integer, MatchableTableColumn>> resultCollector) {
 				
 				for(Integer tableId : classesPerColumnId.get(record.getColumnIndex())) {
 					Pair<Integer, MatchableTableColumn> tableWithColumn = new Pair<Integer, MatchableTableColumn>(tableId, record);
@@ -186,7 +186,7 @@ public class ClassAndTypeBasedSchemaBlocker
 
 			@Override
 			public void mapRecord(Pair<Pair<MatchableTableColumn, Pair<Integer, Integer>>, Pair<Integer, MatchableTableColumn>> record,
-					DatasetIterator<Pair<MatchableTableColumn, Pair<Integer, MatchableTableColumn>>> resultCollector) {
+					DataIterator<Pair<MatchableTableColumn, Pair<Integer, MatchableTableColumn>>> resultCollector) {
 				
 				Pair<MatchableTableColumn, Pair<Integer, MatchableTableColumn>> webTableColumnToDBpediaColumn = new Pair<MatchableTableColumn, Pair<Integer, MatchableTableColumn>>(record.getFirst().getFirst(), record.getSecond());
 
@@ -231,7 +231,7 @@ public class ClassAndTypeBasedSchemaBlocker
 			@Override
 			public void mapRecord(
 					Pair<Iterable<Pair<MatchableTableColumn, Pair<Integer, MatchableTableColumn>>>, Iterable<Correspondence<MatchableTableRow, Matchable>>> record,
-					DatasetIterator<Correspondence<MatchableTableColumn, MatchableTableRow>> resultCollector) {
+					DataIterator<Correspondence<MatchableTableColumn, MatchableTableRow>> resultCollector) {
 				
 				// record contains all data (column pairs and instance correspondences) for a combination of two tables
 				// the BlockedMatchable that we want contains two columns and a list of instance correspondences

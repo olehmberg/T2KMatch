@@ -48,7 +48,7 @@ import de.uni_mannheim.informatik.dws.winter.model.Performance;
 import de.uni_mannheim.informatik.dws.winter.model.io.CSVCorrespondenceFormatter;
 import de.uni_mannheim.informatik.dws.winter.preprocessing.datatypes.DataType;
 import de.uni_mannheim.informatik.dws.winter.processing.DataAggregator;
-import de.uni_mannheim.informatik.dws.winter.processing.DatasetIterator;
+import de.uni_mannheim.informatik.dws.winter.processing.DataIterator;
 import de.uni_mannheim.informatik.dws.winter.processing.Processable;
 import de.uni_mannheim.informatik.dws.winter.processing.ProcessableCollection;
 import de.uni_mannheim.informatik.dws.winter.processing.RecordKeyValueMapper;
@@ -545,7 +545,7 @@ public class T2KMatch extends Executable implements Serializable {
 
 			@Override
 			public void mapRecordToKey(Correspondence<MatchableTableRow, MatchableTableColumn> record,
-					DatasetIterator<Pair<String, Correspondence<MatchableTableRow, MatchableTableColumn>>> resultCollector) {
+					DataIterator<Pair<String, Correspondence<MatchableTableRow, MatchableTableColumn>>> resultCollector) {
 				
 				String tableName = web.getTableNames().get(record.getFirstRecord().getTableId());
 				

@@ -3,7 +3,7 @@ package de.uni_mannheim.informatik.dws.t2k.match.recordmapper;
 import de.uni_mannheim.informatik.dws.t2k.match.data.MatchableTableColumn;
 import de.uni_mannheim.informatik.dws.t2k.match.data.MatchableTableRow;
 import de.uni_mannheim.informatik.dws.winter.model.Correspondence;
-import de.uni_mannheim.informatik.dws.winter.processing.DatasetIterator;
+import de.uni_mannheim.informatik.dws.winter.processing.DataIterator;
 import de.uni_mannheim.informatik.dws.winter.processing.RecordMapper;
 
 /**
@@ -30,7 +30,7 @@ public class CorrespondenceWeightingRecordMapper implements RecordMapper<Corresp
 	@Override
 	public void mapRecord(
 			Correspondence<MatchableTableColumn, MatchableTableRow> record,
-			DatasetIterator<Correspondence<MatchableTableColumn, MatchableTableRow>> resultCollector) {
+			DataIterator<Correspondence<MatchableTableColumn, MatchableTableRow>> resultCollector) {
 		record.setsimilarityScore(record.getSimilarityScore() * weight);
 		resultCollector.next(record);
 	}

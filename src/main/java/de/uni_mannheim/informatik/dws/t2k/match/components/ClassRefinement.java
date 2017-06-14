@@ -26,7 +26,7 @@ import de.uni_mannheim.informatik.dws.t2k.match.data.MatchableTableRow;
 import de.uni_mannheim.informatik.dws.winter.model.Correspondence;
 import de.uni_mannheim.informatik.dws.winter.model.Pair;
 import de.uni_mannheim.informatik.dws.winter.processing.DataAggregator;
-import de.uni_mannheim.informatik.dws.winter.processing.DatasetIterator;
+import de.uni_mannheim.informatik.dws.winter.processing.DataIterator;
 import de.uni_mannheim.informatik.dws.winter.processing.Processable;
 import de.uni_mannheim.informatik.dws.winter.processing.RecordKeyValueMapper;
 import de.uni_mannheim.informatik.dws.winter.utils.query.Q;
@@ -73,7 +73,7 @@ public class ClassRefinement {
 
 			@Override
 			public void mapRecordToKey(Correspondence<MatchableTableColumn, MatchableTableRow> record,
-					DatasetIterator<Pair<Pair<Integer, String>, Double>> resultCollector) {
+					DataIterator<Pair<Pair<Integer, String>, Double>> resultCollector) {
 				
 				// group the similarity values per class/property combination
 				// a property will be counted for multiple classes!
@@ -134,7 +134,7 @@ public class ClassRefinement {
 
 			@Override
 			public void mapRecordToKey(Pair<Pair<Integer, String>, Double> record,
-					DatasetIterator<Pair<Integer, Pair<String, Double>>> resultCollector) {
+					DataIterator<Pair<Integer, Pair<String, Double>>> resultCollector) {
 				
 				// the grouping key is the web table id
 				int groupingKey = record.getFirst().getFirst();

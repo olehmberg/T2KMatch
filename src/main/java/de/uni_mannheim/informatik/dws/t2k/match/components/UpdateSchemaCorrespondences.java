@@ -24,7 +24,7 @@ import de.uni_mannheim.informatik.dws.t2k.match.recordmapper.GroupCorrespondence
 import de.uni_mannheim.informatik.dws.t2k.match.recordmapper.SumCorrespondenceSimilarityAggregator;
 import de.uni_mannheim.informatik.dws.winter.model.Correspondence;
 import de.uni_mannheim.informatik.dws.winter.model.Pair;
-import de.uni_mannheim.informatik.dws.winter.processing.DatasetIterator;
+import de.uni_mannheim.informatik.dws.winter.processing.DataIterator;
 import de.uni_mannheim.informatik.dws.winter.processing.Processable;
 
 /**
@@ -68,7 +68,7 @@ public class UpdateSchemaCorrespondences {
     	
     	return sum.transform( 
 			(Pair<String, Correspondence<MatchableTableColumn, MatchableTableRow>> record, 
-				DatasetIterator<Correspondence<MatchableTableColumn, MatchableTableRow>> resultCollector)  ->
+				DataIterator<Correspondence<MatchableTableColumn, MatchableTableRow>> resultCollector)  ->
     		{
     			resultCollector.next(record.getSecond());	
 			});
