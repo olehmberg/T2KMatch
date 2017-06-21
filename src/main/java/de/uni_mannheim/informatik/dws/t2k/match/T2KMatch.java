@@ -260,7 +260,7 @@ public class T2KMatch extends Executable implements Serializable {
     	 * Key Preparation
     	 ***********************************************/
     	// create schema correspondences between the key columns and rdfs:Label
-    	Processable<Correspondence<MatchableTableColumn, MatchableTableRow>> keyCorrespondences = web.getKeys().transform(new WebTableKeyToRdfsLabelCorrespondenceGenerator(kb.getRdfsLabel()));
+    	Processable<Correspondence<MatchableTableColumn, MatchableTableRow>> keyCorrespondences = web.getKeys().map(new WebTableKeyToRdfsLabelCorrespondenceGenerator(kb.getRdfsLabel()));
     	if(verbose) {
     		for(Correspondence<MatchableTableColumn, MatchableTableRow> cor : keyCorrespondences.get()) {
     			System.out.println(String.format("%s: [%d]%s", web.getTableNames().get(cor.getFirstRecord().getTableId()), cor.getFirstRecord().getColumnIndex(), cor.getFirstRecord().getHeader()));
@@ -553,7 +553,7 @@ public class T2KMatch extends Executable implements Serializable {
 				
 			}
 		};
-		Processable<Pair<String, Integer>> counts = instanceCorrespondences.aggregateRecords(groupBy, new CountAggregator<String, Correspondence<MatchableTableRow, MatchableTableColumn>>());
+		Processable<Pair<String, Integer>> counts = instanceCorrespondences.aggregate(groupBy, new CountAggregator<String, Correspondence<MatchableTableRow, MatchableTableColumn>>());
 		
 		// get class distribution
 		DataAggregator<String, Correspondence<MatchableTableRow, MatchableTableColumn>, Map<String, Integer>> classAggregator = new DataAggregator<String, Correspondence<MatchableTableRow,MatchableTableColumn>, Map<String,Integer>>() {
@@ -582,7 +582,7 @@ public class T2KMatch extends Executable implements Serializable {
 			}
 		};
 		
-		Processable<Pair<String, Map<String, Integer>>> classDistribution = instanceCorrespondences.aggregateRecords(groupBy, classAggregator);
+		Processable<Pair<String, Map<String, Integer>>> classDistribution = instanceCorrespondences.aggregate(groupBy, classAggregator);
 		final Map<String, Map<String, Integer>> classesByTable = Pair.toMap(classDistribution.get());
 		
 		System.out.println("Candidates per Table:");

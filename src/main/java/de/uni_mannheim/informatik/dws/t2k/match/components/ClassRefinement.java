@@ -120,7 +120,7 @@ public class ClassRefinement {
 				return previousResult+record;
 			}
 		};
-		Processable<Pair<Pair<Integer, String>, Double>> classScores = schemaCorrespondences.aggregateRecords(groupByClassProperty, sumSimilarityScore);
+		Processable<Pair<Pair<Integer, String>, Double>> classScores = schemaCorrespondences.aggregate(groupByClassProperty, sumSimilarityScore);
 		
 		// now we have all class scores for all tables
 		// and we can pick the class with the highest score for each table
@@ -171,7 +171,7 @@ public class ClassRefinement {
 				}
 			}
 		};
-		Processable<Pair<Integer, Pair<String, Double>>> bestClassPerTable = classScores.aggregateRecords(groupByTableId, selectMaxClass);
+		Processable<Pair<Integer, Pair<String, Double>>> bestClassPerTable = classScores.aggregate(groupByTableId, selectMaxClass);
 		
 		// we have selected the best class for each table, now bring it into the correct data format
 		HashMap<Integer, Set<String>> classesPerTable = new HashMap<>();

@@ -163,7 +163,7 @@ public class ClassAndTypeBasedSchemaBlocker
 				
 			}
 		};
-		Processable<Pair<Integer, MatchableTableColumn>> dbpediaColumnsForAllTables = schema2.transform(dbpediaColumnToTableIdMapper);
+		Processable<Pair<Integer, MatchableTableColumn>> dbpediaColumnsForAllTables = schema2.map(dbpediaColumnToTableIdMapper);
 		
 		Function<Integer, Pair<Integer, MatchableTableColumn>> dbpediaColumnToTableId = new Function<Integer, Pair<Integer, MatchableTableColumn>>() {
 
@@ -198,7 +198,7 @@ public class ClassAndTypeBasedSchemaBlocker
 		};
 		
 		// this transformation results in <web table column, dbpedia column>
-		Processable<Pair<MatchableTableColumn, Pair<Integer, MatchableTableColumn>>> blockedColumns = columnsJoinedViaRefinedClasses.transform(filterDataTypeMapper);
+		Processable<Pair<MatchableTableColumn, Pair<Integer, MatchableTableColumn>>> blockedColumns = columnsJoinedViaRefinedClasses.map(filterDataTypeMapper);
 		
 		// now we only need to get all instance correspondences that are relevant for a given column combination
 		// so we group all pairs and instance correspondences by both table ids

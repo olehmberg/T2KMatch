@@ -216,7 +216,7 @@ public class TripleGenerator {
 				
 			}
 		};
-		Processable<Pair<Boolean, Integer>> counts = triples.aggregateRecords(groupByIsNew, new CountAggregator<Boolean,ExtractedTriple>());
+		Processable<Pair<Boolean, Integer>> counts = triples.aggregate(groupByIsNew, new CountAggregator<Boolean,ExtractedTriple>());
 		
 		for(Pair<Boolean, Integer> p : counts.get()) {
 			if(p.getFirst()) {
@@ -241,7 +241,7 @@ public class TripleGenerator {
 				
 			}
 		};
-		Processable<Pair<Boolean, Integer>> counts = triples.aggregateRecords(groupByIsCorrect, new CountAggregator<Boolean,ExtractedTriple>());
+		Processable<Pair<Boolean, Integer>> counts = triples.aggregate(groupByIsCorrect, new CountAggregator<Boolean,ExtractedTriple>());
 		
 		for(Pair<Boolean, Integer> p : counts.get()) {
 			if(p.getFirst()) {

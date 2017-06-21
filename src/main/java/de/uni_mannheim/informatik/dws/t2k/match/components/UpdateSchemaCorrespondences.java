@@ -53,10 +53,10 @@ public class UpdateSchemaCorrespondences {
 	public Processable<Correspondence<MatchableTableColumn, MatchableTableRow>> run() {
 		// multiply the similarity scores with the respective weights (old: 0.5; new: 0.5)
     	CorrespondenceWeightingRecordMapper weightDuplicateBased = new CorrespondenceWeightingRecordMapper(0.5);
-    	schemaCorrespondences = schemaCorrespondences.transform(weightDuplicateBased);
+    	schemaCorrespondences = schemaCorrespondences.map(weightDuplicateBased);
     	
     	CorrespondenceWeightingRecordMapper weightLabelBased = new CorrespondenceWeightingRecordMapper(0.5);
-    	newSchemaCorrespondences = newSchemaCorrespondences.transform(weightLabelBased);
+    	newSchemaCorrespondences = newSchemaCorrespondences.map(weightLabelBased);
     	
     	// combine the correspondences
     	Processable<Correspondence<MatchableTableColumn, MatchableTableRow>> combinresult = schemaCorrespondences.append(newSchemaCorrespondences);
@@ -64,9 +64,9 @@ public class UpdateSchemaCorrespondences {
     	// group correspondences between the same column/property combination by summing up the weighted scores
     	GroupCorrespondencesRecordKeyMapper groupCorrespondences = new GroupCorrespondencesRecordKeyMapper();
     	SumCorrespondenceSimilarityAggregator sumSimilarity = new SumCorrespondenceSimilarityAggregator();
-    	Processable<Pair<String, Correspondence<MatchableTableColumn, MatchableTableRow>>> sum = combinresult.aggregateRecords(groupCorrespondences, sumSimilarity);
+    	Processable<Pair<String, Correspondence<MatchableTableColumn, MatchableTableRow>>> sum = combinresult.aggregate(groupCorrespondences, sumSimilarity);
     	
-    	return sum.transform( 
+    	return sum.map( 
 			(Pair<String, Correspondence<MatchableTableColumn, MatchableTableRow>> record, 
 				DataIterator<Correspondence<MatchableTableColumn, MatchableTableRow>> resultCollector)  ->
     		{

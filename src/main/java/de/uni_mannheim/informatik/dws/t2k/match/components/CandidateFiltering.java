@@ -74,7 +74,7 @@ public class CandidateFiltering {
 				}
 			}
 		};
-		return instanceCorrespondences.transform(filterInvalidClasses);
+		return instanceCorrespondences.map(filterInvalidClasses);
 	}
 	
 }

@@ -80,10 +80,10 @@ public class CombineSchemaCorrespondences {
 	public Processable<Correspondence<MatchableTableColumn, MatchableTableRow>> run() {
 		// multiply the similarity scores with the respective weights (duplicate: 0.8; label: 0.2)
     	CorrespondenceWeightingRecordMapper weightDuplicateBased = new CorrespondenceWeightingRecordMapper(0.8);
-    	schemaCorrespondences = schemaCorrespondences.transform(weightDuplicateBased);
+    	schemaCorrespondences = schemaCorrespondences.map(weightDuplicateBased);
     	
     	CorrespondenceWeightingRecordMapper weightLabelBased = new CorrespondenceWeightingRecordMapper(0.2);
-    	labelBasedSchemaCorrespondences = labelBasedSchemaCorrespondences.transform(weightLabelBased);
+    	labelBasedSchemaCorrespondences = labelBasedSchemaCorrespondences.map(weightLabelBased);
     	
     	// combine the correspondences
     	Processable<Correspondence<MatchableTableColumn, MatchableTableRow>> combinresult = schemaCorrespondences.append(labelBasedSchemaCorrespondences);
@@ -91,7 +91,7 @@ public class CombineSchemaCorrespondences {
     	// group correspondences between the same column/property combination by summing up the weighted scores
     	GroupCorrespondencesRecordKeyMapper groupCorrespondences = new GroupCorrespondencesRecordKeyMapper();
     	SumCorrespondenceSimilarityAggregator sumSimilarity = new SumCorrespondenceSimilarityAggregator();
-    	Processable<Pair<String, Correspondence<MatchableTableColumn, MatchableTableRow>>> sum = combinresult.aggregateRecords(groupCorrespondences, sumSimilarity);
+    	Processable<Pair<String, Correspondence<MatchableTableColumn, MatchableTableRow>>> sum = combinresult.aggregate(groupCorrespondences, sumSimilarity);
     	
     	if(isVerbose()) {
     		for(Pair<String, Correspondence<MatchableTableColumn, MatchableTableRow>> record : sum.get()) {
@@ -111,7 +111,7 @@ public class CombineSchemaCorrespondences {
 				}
 			}
 		};
-		schemaCorrespondences = sum.transform(sumToCorrespondences);
+		schemaCorrespondences = sum.map(sumToCorrespondences);
 			    	
     	schemaCorrespondences = schemaCorrespondences.append(keyCorrespondences);
     	

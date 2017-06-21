@@ -47,7 +47,7 @@ public class ClassDecision implements Serializable{
 //    	calculate class weight for each class from Knowledge-Base
 		classWeight = kb.getClassWeight();
 
-		instanceCorrespondences = instanceCorrespondences.transform( 
+		instanceCorrespondences = instanceCorrespondences.map( 
 			(Correspondence<MatchableTableRow, MatchableTableColumn> record,
 				DataIterator<Correspondence<MatchableTableRow, MatchableTableColumn>> resultCollector) ->
 			{
@@ -77,7 +77,7 @@ public class ClassDecision implements Serializable{
 		
 		final Map<Integer, String> classIndices = kb.getClassIndices();
 
-		Processable<Pair<Integer, Distribution<Integer>>> candidates = correspondences.aggregateRecords(
+		Processable<Pair<Integer, Distribution<Integer>>> candidates = correspondences.aggregate(
 			// map each instance correspondence to its table id (= group by input table)
 			(Correspondence<MatchableTableRow, MatchableTableColumn> record,
 				DataIterator<Pair<Integer, Correspondence<MatchableTableRow, MatchableTableColumn>>> resultCollector) ->

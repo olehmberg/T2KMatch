@@ -150,7 +150,7 @@ public class CandidateGenerationMultiKeyBlocker
 			}
 		};
 		
-		Processable<Triple<String, MatchableTableRow, Correspondence<MatchableTableColumn, Matchable>>> blockedWebTableRows = rowsWithKeyCorrespondences.transform(webTableRowBlockingFunction);
+		Processable<Triple<String, MatchableTableRow, Correspondence<MatchableTableColumn, Matchable>>> blockedWebTableRows = rowsWithKeyCorrespondences.map(webTableRowBlockingFunction);
 		
 		// now generate the blocking keys for the dbpedia rows
 		RecordMapper<MatchableTableRow, Pair<String, MatchableTableRow>> dbpediaRowBlockingFunction = new RecordMapper<MatchableTableRow, Pair<String,MatchableTableRow>>() {
@@ -167,7 +167,7 @@ public class CandidateGenerationMultiKeyBlocker
 			}
 		};
 		
-		Processable<Pair<String, MatchableTableRow>> blockedDBpediaRows = dataset2.transform(dbpediaRowBlockingFunction);
+		Processable<Pair<String, MatchableTableRow>> blockedDBpediaRows = dataset2.map(dbpediaRowBlockingFunction);
 		
 		// then we can join both results via the URI (the String in the pair/triple)
 //		Function<String, Triple<String, MatchableTableRow, Correspondence<MatchableTableColumn, MatchableTableRow>>> tripleJoinKeyGenerator = new Function<String, Triple<String, MatchableTableRow, Correspondence<MatchableTableColumn, MatchableTableRow>>>() {
@@ -215,7 +215,7 @@ public class CandidateGenerationMultiKeyBlocker
 			}
 		};
 
-		Processable<Correspondence<MatchableTableRow, MatchableTableColumn>> result = blocks.transform(blockedMatchableTransformation);
+		Processable<Correspondence<MatchableTableRow, MatchableTableColumn>> result = blocks.map(blockedMatchableTransformation);
 		
 		calculatePerformance(dataset1, dataset2, result);
 		

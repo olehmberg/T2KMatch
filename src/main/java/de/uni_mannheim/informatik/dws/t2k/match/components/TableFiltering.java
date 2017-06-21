@@ -111,7 +111,7 @@ public class TableFiltering {
 				resultCollector.next(new Pair<Integer, MatchableTableRow>(record.getTableId(), record));
 			}
 		};
-		Processable<Pair<Integer, Integer>> recordsPerTable = web.getRecords().aggregateRecords(groupRecordByTableId, new CountAggregator<Integer, MatchableTableRow>());
+		Processable<Pair<Integer, Integer>> recordsPerTable = web.getRecords().aggregate(groupRecordByTableId, new CountAggregator<Integer, MatchableTableRow>());
 		
 		// determine the number of correspondences per table
 		RecordKeyValueMapper<Integer, Correspondence<MatchableTableRow, MatchableTableColumn>, Correspondence<MatchableTableRow, MatchableTableColumn>> groupCorrespondencesByTableId = new RecordKeyValueMapper<Integer, Correspondence<MatchableTableRow,MatchableTableColumn>, Correspondence<MatchableTableRow,MatchableTableColumn>>() {
@@ -127,7 +127,7 @@ public class TableFiltering {
 				resultCollector.next(new Pair<Integer, Correspondence<MatchableTableRow,MatchableTableColumn>>(record.getFirstRecord().getTableId(), record));
 			}
 		};
-		Processable<Pair<Integer, Integer>> correspondencesPerTable = instanceCorrespondences.aggregateRecords(groupCorrespondencesByTableId, new CountAggregator<Integer, Correspondence<MatchableTableRow, MatchableTableColumn>>());
+		Processable<Pair<Integer, Integer>> correspondencesPerTable = instanceCorrespondences.aggregate(groupCorrespondencesByTableId, new CountAggregator<Integer, Correspondence<MatchableTableRow, MatchableTableColumn>>());
 		
 		// calculate the mapped ratio
 		Function<Integer, Pair<Integer, Integer>> joinByTableId = new Function<Integer, Pair<Integer,Integer>>() {
@@ -169,7 +169,7 @@ public class TableFiltering {
 				
 			}
 		};
-		return tableWithRecordsAndCorrespondences.transform(calculateMappedRatio);
+		return tableWithRecordsAndCorrespondences.map(calculateMappedRatio);
 	}
 	
 	protected void filterClassCorrespondences(Processable<Pair<Integer, Double>> mappedRatio) {
@@ -229,7 +229,7 @@ public class TableFiltering {
 				resultCollector.next(record.getFirst());
 			}
 		};
-		instanceCorrespondences = filteredCorrespondences.transform(getCorrespondences);
+		instanceCorrespondences = filteredCorrespondences.map(getCorrespondences);
 	}
 	
 	protected void filterSchemaCorrespondences(Processable<Pair<Integer, Double>> mappedRatio) {
@@ -272,7 +272,7 @@ public class TableFiltering {
 				resultCollector.next(record.getFirst());
 			}
 		};
-		schemaCorrespondences = filteredCorrespondences.transform(getCorrespondences);
+		schemaCorrespondences = filteredCorrespondences.map(getCorrespondences);
 	}
 
 }
