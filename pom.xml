@@ -66,12 +66,12 @@
 		<dependency>
 			<groupId>de.uni_mannheim.informatik.dws</groupId>
 			<artifactId>winter</artifactId>
-			<version>1.0</version>
+			<version>1.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.esotericsoftware</groupId>
 			<artifactId>kryo</artifactId>
-			<version>3.0.0</version>
+			<version>4.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>de.javakaffee</groupId>

@@ -22,10 +22,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.GregorianCalendar;
 
-import org.joda.time.DateTime;
-import org.joda.time.LocalDate;
-import org.joda.time.LocalDateTime;
-
 import com.esotericsoftware.kryo.Kryo;
 
 import de.javakaffee.kryoserializers.ArraysAsListSerializer;
@@ -39,9 +35,6 @@ import de.javakaffee.kryoserializers.GregorianCalendarSerializer;
 import de.javakaffee.kryoserializers.JdkProxySerializer;
 import de.javakaffee.kryoserializers.SynchronizedCollectionsSerializer;
 import de.javakaffee.kryoserializers.UnmodifiableCollectionsSerializer;
-import de.javakaffee.kryoserializers.jodatime.JodaDateTimeSerializer;
-import de.javakaffee.kryoserializers.jodatime.JodaLocalDateSerializer;
-import de.javakaffee.kryoserializers.jodatime.JodaLocalDateTimeSerializer;
 
 /**
  * Factory for Kryo, needed if used in combination with Spark (which seems to use a different version of Kryo).
@@ -70,9 +63,6 @@ public class KryoFactory {
 		SynchronizedCollectionsSerializer.registerSerializers( kryo );
 
 		// custom serializers for non-jdk libs
-		kryo.register( DateTime.class, new JodaDateTimeSerializer() );
-		kryo.register( LocalDate.class, new JodaLocalDateSerializer() );
-		kryo.register( LocalDateTime.class, new JodaLocalDateTimeSerializer() );
 		
 		return kryo;
 	}

@@ -5,12 +5,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.joda.time.DateTime;
 
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.io.Input;
@@ -188,12 +187,12 @@ public class WebTables implements Serializable{
 		    			mc.setStatistics(c.calculateColumnStatistics());
 		    		} else if(c.getDataType()==DataType.date) {
 		    			for(TableRow row : web.getRows()) {
-		    				DateTime value = (DateTime)row.get(c.getColumnIndex());
+		    				LocalDateTime value = (LocalDateTime)row.get(c.getColumnIndex());
 		    				if(value!=null) {
-		    					if(mc.getMax()==null || value.compareTo((DateTime)mc.getMax())>0) {
+		    					if(mc.getMax()==null || value.compareTo((LocalDateTime)mc.getMax())>0) {
 		    						mc.setMax(value);
 		    					}
-		    					if(mc.getMin()==null || value.compareTo((DateTime)mc.getMin())<0) {
+		    					if(mc.getMin()==null || value.compareTo((LocalDateTime)mc.getMin())<0) {
 		    						mc.setMin(value);
 		    					}
 		    				}

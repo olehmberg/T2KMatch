@@ -1,6 +1,10 @@
 package de.uni_mannheim.informatik.dws.t2k.match.data;
 
-import org.joda.time.DateTime;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.temporal.ChronoField;
+import java.util.Locale;
 
 import de.uni_mannheim.informatik.dws.winter.preprocessing.datatypes.DataType;
 import junit.framework.TestCase;
@@ -15,8 +19,14 @@ public class MatchableTableRowTest extends TestCase {
 	 */
 	public void testMatchableTableRow(){
 //		create table row
+		DateTimeFormatter formatter = new DateTimeFormatterBuilder()
+		        .appendPattern("yyyy-MM-dd")
+		        .parseDefaulting(ChronoField.CLOCK_HOUR_OF_DAY, 0)
+		        .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
+		        .parseDefaulting(ChronoField.SECOND_OF_MINUTE, 0)
+		        .toFormatter(Locale.ENGLISH);
 		MatchableTableRow r1 = new MatchableTableRow("a", new String[] { "Republican Party (United States)" }, 0, new DataType[] { DataType.string });
-		MatchableTableRow r2 = new MatchableTableRow("b", new Object[] { DateTime.parse("1977-05-25") }, 0, new DataType[] { DataType.date });
+		MatchableTableRow r2 = new MatchableTableRow("b", new Object[] { LocalDateTime.parse("1977-05-25", formatter) }, 0, new DataType[] { DataType.date });
 		
 //		check for values and null pointers
 		assertNotNull(r1.getIdentifier());

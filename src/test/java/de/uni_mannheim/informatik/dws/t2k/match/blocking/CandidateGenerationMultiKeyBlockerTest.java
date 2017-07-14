@@ -1,9 +1,12 @@
 package de.uni_mannheim.informatik.dws.t2k.match.blocking;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.temporal.ChronoField;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
-
-import org.joda.time.DateTime;
 
 import de.uni_mannheim.informatik.dws.t2k.index.dbpedia.DBpediaIndexer;
 import de.uni_mannheim.informatik.dws.t2k.match.data.MatchableTableColumn;
@@ -37,8 +40,16 @@ public class CandidateGenerationMultiKeyBlockerTest extends TestCase {
 		dataset1.add(wr2);
 		
 //		create kb table rows
-		MatchableTableRow kr1 = new MatchableTableRow("ka", new Object[] { "http://dbpedia.org/resource/Republic", "republican", DateTime.parse("1920") }, 0, new DataType[] { DataType.string, DataType.string, DataType.date });
-		MatchableTableRow kr2 = new MatchableTableRow("kb", new Object[] { "http://dbpedia.org/resource/CDU_Party", "cdu party", DateTime.parse("1940") }, 0, new DataType[] { DataType.string, DataType.string, DataType.date });
+		DateTimeFormatter formatter = new DateTimeFormatterBuilder()
+		        .appendPattern("yyyy")
+		        .parseDefaulting(ChronoField.MONTH_OF_YEAR, 1)
+		        .parseDefaulting(ChronoField.DAY_OF_MONTH, 1)
+		        .parseDefaulting(ChronoField.CLOCK_HOUR_OF_DAY, 0)
+		        .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
+		        .parseDefaulting(ChronoField.SECOND_OF_MINUTE, 0)
+		        .toFormatter(Locale.ENGLISH);
+		MatchableTableRow kr1 = new MatchableTableRow("ka", new Object[] { "http://dbpedia.org/resource/Republic", "republican", LocalDateTime.parse("1920", formatter) }, 0, new DataType[] { DataType.string, DataType.string, DataType.date });
+		MatchableTableRow kr2 = new MatchableTableRow("kb", new Object[] { "http://dbpedia.org/resource/CDU_Party", "cdu party", LocalDateTime.parse("1940", formatter) }, 0, new DataType[] { DataType.string, DataType.string, DataType.date });
 		dataset2.add(kr1);
 		dataset2.add(kr2);
 		
