@@ -51,6 +51,10 @@
 
 	<repositories>
 		<repository>
+			<id>releases</id>
+			<url>https://breda.informatik.uni-mannheim.de/nexus/content/repositories/releases/</url>
+		</repository>
+		<repository>
 			<id>3rd party</id>
 			<url>https://breda.informatik.uni-mannheim.de/nexus/content/repositories/thirdparty/</url>
 		</repository>
@@ -66,7 +70,7 @@
 		<dependency>
 			<groupId>de.uni_mannheim.informatik.dws</groupId>
 			<artifactId>winter</artifactId>
-			<version>1.0.1-SNAPSHOT</version>
+			<version>1.1</version>
 		</dependency>
 		<dependency>
 			<groupId>com.esotericsoftware</groupId>
