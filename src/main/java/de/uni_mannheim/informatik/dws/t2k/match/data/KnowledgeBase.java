@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -16,8 +17,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import org.joda.time.DateTime;
 
 import com.esotericsoftware.kryo.Kryo;
 import com.esotericsoftware.kryo.io.Input;
@@ -61,7 +60,7 @@ public class KnowledgeBase implements Serializable {
 	// translation from column index to global property id per DBpedia class
 	private Map<Integer, Map<Integer, Integer>> propertyIndicesInverse = new HashMap<>();
 	
-	private Map<Integer, DateTime[]> dateRanges = new HashMap<>();
+	private Map<Integer, LocalDateTime[]> dateRanges = new HashMap<>();
 	
 	// translation from table file name to table id
 	private Map<String, Integer> tableIds = new HashMap<>();
@@ -371,7 +370,7 @@ public class KnowledgeBase implements Serializable {
     			
     			if(col.getType()==DataType.date) {
     				
-    				DateTime[] range = MapUtils.get(dateRanges, col.getColumnIndex(), new DateTime[2]);
+    				LocalDateTime[] range = MapUtils.get(dateRanges, col.getColumnIndex(), new LocalDateTime[2]);
     				
     				Map<Integer, Integer> indexTranslation = getPropertyIndices().get(row.getTableId());
     				if(indexTranslation==null) {
@@ -384,9 +383,9 @@ public class KnowledgeBase implements Serializable {
 
 	    				Object obj = row.get(translatedIndex);
 	    				
-	    				if(obj!=null && obj instanceof DateTime) {
+	    				if(obj!=null && obj instanceof LocalDateTime) {
 	    				
-	    					DateTime value = (DateTime)row.get(translatedIndex);
+	    					LocalDateTime value = (LocalDateTime)row.get(translatedIndex);
 	    					
 	    					if(range[0]==null || value.compareTo(range[0]) < 0) {
 	    						range[0] = value;
@@ -397,7 +396,7 @@ public class KnowledgeBase implements Serializable {
 	    					}
 	    					
 	    				} else {
-	    					if(obj!=null && !(obj instanceof DateTime)) {
+	    					if(obj!=null && !(obj instanceof LocalDateTime)) {
 	    						System.err.println(String.format("{%s} row %d property %s has value of invalid type: '%s' (%s)", this.classIndices.get(row.getTableId()), row.getRowNumber(), col.getIdentifier(), obj, obj.getClass()));
 	    					}
 	    				}

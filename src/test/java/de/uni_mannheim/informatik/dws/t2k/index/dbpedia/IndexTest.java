@@ -1,10 +1,13 @@
 package de.uni_mannheim.informatik.dws.t2k.index.dbpedia;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.temporal.ChronoField;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
-
-import org.joda.time.DateTime;
 
 import de.uni_mannheim.informatik.dws.t2k.match.data.MatchableTableColumn;
 import de.uni_mannheim.informatik.dws.t2k.match.data.MatchableTableRow;
@@ -29,11 +32,20 @@ public class IndexTest extends TestCase {
 	public void testIndexInstanceandSearchMany(){
 		DataSet<MatchableTableRow, MatchableTableColumn> dataset = new HashedDataSet<>();
 		
+		DateTimeFormatter formatter = new DateTimeFormatterBuilder()
+		        .appendPattern("yyyy")
+		        .parseDefaulting(ChronoField.MONTH_OF_YEAR, 1)
+		        .parseDefaulting(ChronoField.DAY_OF_MONTH, 1)
+		        .parseDefaulting(ChronoField.CLOCK_HOUR_OF_DAY, 0)
+		        .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
+		        .parseDefaulting(ChronoField.SECOND_OF_MINUTE, 0)
+		        .toFormatter(Locale.ENGLISH);
+		
 //		create kb table rows
-		MatchableTableRow kr1 = new MatchableTableRow("ka", new Object[] { "http://dbpedia.org/resource/Republic", "republican", DateTime.parse("1920") }, 0, new DataType[] { DataType.string, DataType.string, DataType.date });
-		MatchableTableRow kr2 = new MatchableTableRow("kb", new Object[] { "http://dbpedia.org/resource/CDU_Party", "cdu party", DateTime.parse("1940") }, 0, new DataType[] { DataType.string, DataType.string, DataType.date });
-		MatchableTableRow kr3 = new MatchableTableRow("kc", new Object[] { "http://dbpedia.org/resource/Democratic", "democratic", DateTime.parse("1922") }, 1, new DataType[] { DataType.string, DataType.string, DataType.date });
-		MatchableTableRow kr4 = new MatchableTableRow("kd", new Object[] { "http://dbpedia.org/resource/Republic_Party", "republic party", DateTime.parse("1920") }, 1, new DataType[] { DataType.string, DataType.string, DataType.date });
+		MatchableTableRow kr1 = new MatchableTableRow("ka", new Object[] { "http://dbpedia.org/resource/Republic", "republican", LocalDateTime.parse("1920", formatter) }, 0, new DataType[] { DataType.string, DataType.string, DataType.date });
+		MatchableTableRow kr2 = new MatchableTableRow("kb", new Object[] { "http://dbpedia.org/resource/CDU_Party", "cdu party", LocalDateTime.parse("1940", formatter) }, 0, new DataType[] { DataType.string, DataType.string, DataType.date });
+		MatchableTableRow kr3 = new MatchableTableRow("kc", new Object[] { "http://dbpedia.org/resource/Democratic", "democratic", LocalDateTime.parse("1922", formatter) }, 1, new DataType[] { DataType.string, DataType.string, DataType.date });
+		MatchableTableRow kr4 = new MatchableTableRow("kd", new Object[] { "http://dbpedia.org/resource/Republic_Party", "republic party", LocalDateTime.parse("1920", formatter) }, 1, new DataType[] { DataType.string, DataType.string, DataType.date });
 		dataset.add(kr1);
 		dataset.add(kr2);
 		dataset.add(kr3);

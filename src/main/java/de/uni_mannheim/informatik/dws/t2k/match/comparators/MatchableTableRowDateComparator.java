@@ -1,8 +1,7 @@
 package de.uni_mannheim.informatik.dws.t2k.match.comparators;
 
+import java.time.LocalDateTime;
 import java.util.Map;
-
-import org.joda.time.DateTime;
 
 import de.uni_mannheim.informatik.dws.t2k.match.data.MatchableTableColumn;
 import de.uni_mannheim.informatik.dws.t2k.match.data.MatchableTableRow;
@@ -15,7 +14,7 @@ import de.uni_mannheim.informatik.dws.winter.similarity.date.WeightedDateSimilar
  * @author Oliver Lehmberg (oli@dwslab.de)
  *
  */
-public class MatchableTableRowDateComparator extends MatchableTableRowComparator<DateTime> {
+public class MatchableTableRowDateComparator extends MatchableTableRowComparator<LocalDateTime> {
 
 	private static final long serialVersionUID = -4859076819876528713L;
 
@@ -50,7 +49,7 @@ public class MatchableTableRowDateComparator extends MatchableTableRowComparator
 	 */
 	public double compare(MatchableTableRow record1, MatchableTableRow record2, MatchableTableColumn firstColumn, MatchableTableColumn secondColumn) {
 //		value to be compared from recor1. 'firstColumnIndex' tells which column value should be compared
-		DateTime value1 = (DateTime)record1.get(firstColumn.getColumnIndex());
+		LocalDateTime value1 = (LocalDateTime)record1.get(firstColumn.getColumnIndex());
 		
 		Map<Integer, Integer> indexTranslation = dbpPropertyIndices.get(record2.getTableId());
 		if(indexTranslation==null) {
@@ -64,11 +63,11 @@ public class MatchableTableRowDateComparator extends MatchableTableRowComparator
 		}
 		
 //		value to be compared from record2. 'translatedIndex' (columnIndex of dbpedia property in respective table) tells which column value should be compared
-		DateTime value2 = (DateTime)record2.get(translatedIndex);
+		LocalDateTime value2 = (LocalDateTime)record2.get(translatedIndex);
 		
 		// normalise year difference with range from web table column
-		DateTime min = (DateTime)firstColumn.getMin();
-		DateTime max = (DateTime)firstColumn.getMax();
+		LocalDateTime min = (LocalDateTime)firstColumn.getMin();
+		LocalDateTime max = (LocalDateTime)firstColumn.getMax();
 		similarity.setYearRange(Math.abs(max.getYear() - min.getYear()));
 		
 //		calculate the similarity

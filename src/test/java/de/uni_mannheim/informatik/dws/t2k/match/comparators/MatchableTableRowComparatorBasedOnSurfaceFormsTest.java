@@ -17,10 +17,13 @@
  */
 package de.uni_mannheim.informatik.dws.t2k.match.comparators;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.temporal.ChronoField;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
-
-import org.joda.time.DateTime;
 
 import junit.framework.TestCase;
 import de.uni_mannheim.informatik.dws.t2k.match.data.MatchableTableRow;
@@ -66,7 +69,14 @@ public class MatchableTableRowComparatorBasedOnSurfaceFormsTest extends TestCase
 	public void testCanCompare(){
 		MatchableTableRow r1 = new MatchableTableRow("a", new String[] { "republican" }, 0, new DataType[] { DataType.string });
 		MatchableTableRow r2 = new MatchableTableRow("b", new String[] { "Republican Party (United States)" }, 0, new DataType[] { DataType.string });
-		MatchableTableRow r3 = new MatchableTableRow("c", new Object[] { DateTime.parse("1977-05-25") }, 0, new DataType[] { DataType.date });
+		
+		DateTimeFormatter formatter = new DateTimeFormatterBuilder()
+		        .appendPattern("yyyy-MM-dd")
+		        .parseDefaulting(ChronoField.CLOCK_HOUR_OF_DAY, 0)
+		        .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
+		        .parseDefaulting(ChronoField.SECOND_OF_MINUTE, 0)
+		        .toFormatter(Locale.ENGLISH);
+		MatchableTableRow r3 = new MatchableTableRow("c", new Object[] { LocalDateTime.parse("1977-05-25", formatter) }, 0, new DataType[] { DataType.date });
 		MatchableTableRow r4 = new MatchableTableRow("d", new String[] { "democratic" }, 1, new DataType[]{ DataType.string });
 		
 //		create dbpedia properties indices

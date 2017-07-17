@@ -51,6 +51,10 @@
 
 	<repositories>
 		<repository>
+			<id>releases</id>
+			<url>https://breda.informatik.uni-mannheim.de/nexus/content/repositories/releases/</url>
+		</repository>
+		<repository>
 			<id>3rd party</id>
 			<url>https://breda.informatik.uni-mannheim.de/nexus/content/repositories/thirdparty/</url>
 		</repository>
@@ -66,12 +70,12 @@
 		<dependency>
 			<groupId>de.uni_mannheim.informatik.dws</groupId>
 			<artifactId>winter</artifactId>
-			<version>1.0</version>
+			<version>1.1</version>
 		</dependency>
 		<dependency>
 			<groupId>com.esotericsoftware</groupId>
 			<artifactId>kryo</artifactId>
-			<version>3.0.0</version>
+			<version>4.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>de.javakaffee</groupId>
